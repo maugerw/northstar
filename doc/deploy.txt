@@ -1,0 +1,51 @@
+
+app_dict = {}
+
+app_dict["name"] = name
+app_dict["sourcePath"] = source_path
+app_dict["planPath"] = plan_path
+app_dict["connectionInstances"] = extract_connection_instances(plan_path)
+
+
+
+
+def extract_connection_instances(plan_path):
+
+    instances = {}
+
+    f = open(plan_path, 'r')
+
+    for line in f:
+
+        if 'connection-instance/' in line and 'jndi-name="eis/' in line:
+
+            start = line.find('jndi-name="') + 11
+            end = line.find('"', start)
+
+            jndi = line[start:end]
+
+            instances[jndi] = 1
+
+    f.close()
+
+    return sorted(instances.keys())
+
+
+
+
+Deploy:
+
+deploy(
+    name='FtpAdapter',
+    path='FtpAdapter.rar',
+    plan='EO_Plan.xml',
+    targets='soa_cluster,osb_cluster,AdminServer'
+)
+
+Then merely record:
+
+expected_connection_instances = [
+    'eis/Ftp/EO_FtpAdapter'
+]
+
+for reporting purposes.

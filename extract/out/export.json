@@ -1,0 +1,737 @@
+{
+  "safAgents": [
+    {
+      "retryDelayBase": 20000,
+      "name": "GIS_PublishChangeSet_SAF",
+      "serviceType": "Both",
+      "retryDelayMaximum": 180000,
+      "retryDelayMultiplier": 1,
+      "acknowledgeInterval": -1,
+      "loggingEnabled": false,
+      "targets": [],
+      "windowSize": 10,
+      "store": "GIS_OSB_FileStore",
+      "timeToLive": 0
+    },
+    {
+      "retryDelayBase": 20000,
+      "name": "GIS_SAF_Agent",
+      "serviceType": "Sending-only",
+      "retryDelayMaximum": 180000,
+      "retryDelayMultiplier": 1,
+      "acknowledgeInterval": -1,
+      "loggingEnabled": false,
+      "targets": [
+        "osb_server1"
+      ],
+      "windowSize": 10,
+      "store": "GIS_OSB_FileStore",
+      "timeToLive": 0
+    },
+    {
+      "retryDelayBase": 20000,
+      "name": "GIS_SAF_SOA_Agent",
+      "serviceType": "Sending-only",
+      "retryDelayMaximum": 180000,
+      "retryDelayMultiplier": 1,
+      "acknowledgeInterval": -1,
+      "loggingEnabled": false,
+      "targets": [
+        "soa_server1"
+      ],
+      "windowSize": 10,
+      "store": "GIS_SOA_FileStore",
+      "timeToLive": 0
+    },
+    {
+      "retryDelayBase": 20000,
+      "name": "MNSAFAgent",
+      "serviceType": "Sending-only",
+      "retryDelayMaximum": 180000,
+      "retryDelayMultiplier": 1,
+      "acknowledgeInterval": -1,
+      "loggingEnabled": false,
+      "targets": [],
+      "windowSize": 10,
+      "store": "MNFileStore",
+      "timeToLive": 0
+    }
+  ],
+  "adapterDeployments": [
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "DbAdapter",
+      "planPath": "/gmxdevfu/products/middleware/soa/soa/XrefPlan.xml",
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/DbAdapter.rar",
+      "connectionInstances": null
+    },
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "JmsAdapter",
+      "planPath": "/gmxdevfu/products/middleware/soa/soa/Plan.xml",
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/JmsAdapter.rar",
+      "connectionInstances": null
+    },
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "AqAdapter",
+      "planPath": "/gmxdevfu/products/middleware/soa/soa/AQPlan.xml",
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/AqAdapter.rar",
+      "connectionInstances": null
+    },
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "FtpAdapter",
+      "planPath": "/gmxdevfu/products/middleware/soa/soa/EO_Plan.xml",
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/FtpAdapter.rar",
+      "connectionInstances": null
+    }
+  ],
+  "jmsModules": [
+    {
+      "topics": [],
+      "name": "GIS_OSB_JMS_Module",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [],
+      "distributedTopics": [],
+      "queues": [
+        {
+          "errorDestination": null,
+          "name": "GIS_FileNotificationJMSQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/GIS_FileNotificationJMSQueue",
+          "subdeployment": "GIS_OSB_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "TempQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/TempQueue",
+          "subdeployment": "GIS_OSB_JMS_Subdeployment"
+        }
+      ],
+      "targets": [
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "GIS_OSB_JMS_Server"
+          ],
+          "name": "GIS_OSB_JMS_Subdeployment"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "GIS_SAF_JMS_Module",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [
+        {
+          "errorDestination": null,
+          "name": "GIS_ErrorHandlerSAF_SOA",
+          "logFormat": null,
+          "policy": "Discard"
+        }
+      ],
+      "connectionFactories": [],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "osb_cluster"
+          ],
+          "name": "GIS_SAF_JMS_Subdeployment"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "GIS_SAF_SOA_JMS_Module",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "soa_server1"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "GIS_SAF_SOA_Agent"
+          ],
+          "name": "GIS_SAF_SOA_Subdeployment"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "GIS_SOA_JMS_Module",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [],
+      "distributedTopics": [],
+      "queues": [
+        {
+          "errorDestination": null,
+          "name": "GIS_PublishChangeSetJMSQueue_SOA",
+          "redeliveryDelay": null,
+          "jndi": "jms/GIS_PublishChangeSetJMSQueue_SOA",
+          "subdeployment": "GIS_SOA_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "GIS_UpdateJobStatusJMSQueue_SOA",
+          "redeliveryDelay": null,
+          "jndi": "jms/GIS_UpdateJobStatusJMSQueue_SOA",
+          "subdeployment": "GIS_SOA_JMS_Subdeployment"
+        }
+      ],
+      "targets": [
+        "soa_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "GIS_SOA_JMS_Server"
+          ],
+          "name": "GIS_SOA_JMS_Subdeployment"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "MNSAFJMSModule",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [
+        {
+          "errorDestination": null,
+          "name": "MNSAFErrorHandling",
+          "logFormat": null,
+          "policy": "Log"
+        }
+      ],
+      "connectionFactories": [
+        {
+          "name": "MNSAFConnectionFactory",
+          "jndi": "jms/MNSAFConnectionFactory",
+          "subdeployment": "MNSAFConnectionFactory"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "MNSAFAgent"
+          ],
+          "name": "MNSAFSubDeployment"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "MNSOARemoteJMSModule",
+      "uniformDistributedQueues": [
+        {
+          "forwardingPolicy": null,
+          "errorDestination": null,
+          "loadBalancingPolicy": "Round-Robin",
+          "name": "MNSOARemoteQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/MNSOARemoteQueue",
+          "subdeployment": "MNSOARemoteSubDeploymentJmsModule"
+        }
+      ],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "MNSOARemoteCF",
+          "jndi": "jms/MNSOARemoteCF",
+          "subdeployment": "MNSOARemoteCF"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "soa_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "MNSOARemoteJMSServer"
+          ],
+          "name": "MNSOARemoteSubDeploymentJmsModule"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "WAMJMSModule",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "WAMJMSConnectionFactory",
+          "jndi": "jms/WAM_JMS_CF",
+          "subdeployment": "WAMJMSConnectionFactory"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [
+        {
+          "errorDestination": null,
+          "name": "WAM_CBRM_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/WAM_CBRM_JMS_Q",
+          "subdeployment": "WAM_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "WAM_Chime_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/WAM_Chime_JMS_Q",
+          "subdeployment": "WAM_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "WAM_EH_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/WAM_EH_JMS_Q",
+          "subdeployment": "WAM_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "WAM_HICI_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/WAM_HICI_JMS_Q",
+          "subdeployment": "WAM_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "WAM_IPS_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/WAM_IPS_JMS_Q",
+          "subdeployment": "WAM_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "WAM_MX_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/WAM_MX_JMS_Q",
+          "subdeployment": "WAM_JMS_Subdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "WAM_SerialNum_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/WAM_SerialNum_JMS_Q",
+          "subdeployment": "WAM_JMS_Subdeployment"
+        }
+      ],
+      "targets": [
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "WAMJMSServer"
+          ],
+          "name": "WAM_JMS_Subdeployment"
+        }
+      ],
+      "quotas": []
+    }
+  ],
+  "validationWarnings": [],
+  "safRemoteContexts": {},
+  "safImportedDestinations": [],
+  "infrastructure": {
+    "migratableTargets": [],
+    "jdbcDataSources": [
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "CommonAuditLog",
+        "url": "jdbc:oracle:thin:@porud455:1526:CBRMDEV",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "MAXIMO"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/CommonAuditLog"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "FaultDataSource",
+        "url": "jdbc:weblogic:sqlserver://AZUWDEV000536:1433;allowPortWithNamedInstance=true",
+        "driverName": "weblogic.jdbc.sqlserver.SQLServerDriver",
+        "testTableName": "SQL SELECT 1",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "allowPortWithNamedInstance",
+            "value": "true"
+          },
+          {
+            "name": "databaseName",
+            "value": "Faults_DEV"
+          },
+          {
+            "name": "portNumber",
+            "value": "1433"
+          },
+          {
+            "name": "serverName",
+            "value": "AZUWDEV000536"
+          },
+          {
+            "name": "user",
+            "value": "oms_fault"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/FaultIntegration_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "SIMSOMSIntegration_XA",
+        "url": "jdbc:oracle:thin:@havud301:1526:SIMSDEV",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "sims2"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMSOMSIntegration_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "WAM2JMSLocalDataSource",
+        "url": "jdbc:oracle:thin:@//havut049:1526/DBMRDV01",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GIS_XREF"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/WAM2JMSLocalDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 3,
+        "minCapacity": 1,
+        "name": "WAM_XXCUST_XA",
+        "url": "jdbc:oracle:thin:@havut049:1526:DBMRDV01",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "WAM_XXCUST"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "OnePhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/WAM_XXCUST_XA"
+        ]
+      },
+      {
+        "maxCapacity": 150,
+        "minCapacity": 1,
+        "name": "XrefDataSource",
+        "url": "jdbc:oracle:thin:@//havut049:1526/DBMRDV01",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GIS_XREF"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 5,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/xref"
+        ]
+      }
+    ],
+    "persistentStores": [
+      {
+        "prefixName": null,
+        "directory": "GIS_OSB_FileStore",
+        "targets": [
+          "osb_server1"
+        ],
+        "name": "GIS_OSB_FileStore",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "soa_server1"
+        ],
+        "name": "GIS_SOA_FileStore",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "AdminServer"
+        ],
+        "name": "JMS_DB_Store",
+        "type": "JDBCStore",
+        "synchronousWritePolicy": null,
+        "dataSource": "SOALocalTxDataSource"
+      },
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "osb_server1"
+        ],
+        "name": "MNFileStore",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "soa_server1"
+        ],
+        "name": "MNSOARemoteFileStore",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": "WAM2Store_MS1",
+        "directory": null,
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "name": "WAM2JDBCStore_MS1",
+        "type": "JDBCStore",
+        "synchronousWritePolicy": null,
+        "dataSource": "WAM2JMSLocalDataSource"
+      },
+      {
+        "prefixName": "WAM2Store_MS2",
+        "directory": null,
+        "targets": [
+          "soa_server1 (migratable)"
+        ],
+        "name": "WAM2JDBCStore_MS2",
+        "type": "JDBCStore",
+        "synchronousWritePolicy": null,
+        "dataSource": "WAM2JMSLocalDataSource"
+      },
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "osb_server1"
+        ],
+        "name": "WAM2_JMS_FILE_STORE",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "osb_server1"
+        ],
+        "name": "WAMFileStore",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      }
+    ],
+    "jmsServers": [
+      {
+        "targets": [
+          "osb_server1"
+        ],
+        "persistentStore": "GIS_OSB_FileStore",
+        "bytesMaximum": -1,
+        "name": "GIS_OSB_JMS_Server",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "soa_server1"
+        ],
+        "persistentStore": "GIS_SOA_FileStore",
+        "bytesMaximum": -1,
+        "name": "GIS_SOA_JMS_Server",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "soa_server1"
+        ],
+        "persistentStore": "MNSOARemoteFileStore",
+        "bytesMaximum": -1,
+        "name": "MNSOARemoteJMSServer",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "osb_server1"
+        ],
+        "persistentStore": "WAMFileStore",
+        "bytesMaximum": -1,
+        "name": "WAMJMSServer",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      }
+    ]
+  }
+}

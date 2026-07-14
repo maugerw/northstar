@@ -1,0 +1,1243 @@
+{
+  "systemJmsModules": [
+    {
+      "topics": [],
+      "name": "UMSJMSSystemResource",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "OraSDPM/QueueConnectionFactory",
+          "jndi": "OraSDPM/QueueConnectionFactory",
+          "subdeployment": "OraSDPM/QueueConnectionFactory"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "soa_cluster",
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [
+        {
+          "name": "Priority",
+          "keyType": "Int",
+          "property": "JMSPriority",
+          "direction": null
+        }
+      ],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "UMSJMSServer_auto_1"
+          ],
+          "name": "UMSJMSServer533860713"
+        },
+        {
+          "targets": [
+            "UMSJMSServer_auto_2"
+          ],
+          "name": "UMSJMSServer-994627064"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "UMSAQJMSSystemResource",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [],
+      "foreignServers": [
+        {
+          "foreignConnectionFactories": [
+            {
+              "localJNDIName": "OraSDPM/QueueConnectionFactory",
+              "name": "OraSDPM/QueueConnectionFactory",
+              "remoteJNDIName": "XAQueueConnectionFactory"
+            }
+          ],
+          "name": "UMSAQJMSForeignServer",
+          "initialContextFactory": "oracle.jms.AQjmsInitialContextFactory",
+          "defaultTargetingEnabled": false,
+          "connectionURL": null,
+          "foreignDestinations": [
+            {
+              "localJNDIName": "OraSDPM/Queues/OraSDPMAppDefRcvQ1",
+              "name": "OraSDPM/Queues/OraSDPMAppDefRcvQ1",
+              "remoteJNDIName": "Queues/OraSDPMAppDefRcvQ1"
+            },
+            {
+              "localJNDIName": "OraSDPM/Queues/OraSDPMAppDefRcvErrorQ1",
+              "name": "OraSDPM/Queues/OraSDPMAppDefRcvErrorQ1",
+              "remoteJNDIName": "Queues/AQ$_OraSDPMAppDefRcvT1_E"
+            },
+            {
+              "localJNDIName": "OraSDPM/Queues/OraSDPMDriverDefSndQ1",
+              "name": "OraSDPM/Queues/OraSDPMDriverDefSndQ1",
+              "remoteJNDIName": "Queues/OraSDPMDriverDefSndQ1"
+            },
+            {
+              "localJNDIName": "OraSDPM/Queues/OraSDPMEngineRcvQ1",
+              "name": "OraSDPM/Queues/OraSDPMEngineRcvQ1",
+              "remoteJNDIName": "Queues/OraSDPMEngineRcvQ1"
+            },
+            {
+              "localJNDIName": "OraSDPM/Queues/OraSDPMEngineSndQ1",
+              "name": "OraSDPM/Queues/OraSDPMEngineSndQ1",
+              "remoteJNDIName": "Queues/OraSDPMEngineSndQ1"
+            },
+            {
+              "localJNDIName": "OraSDPM/Queues/OraSDPMEnginePendingRcvQ",
+              "name": "OraSDPM/Queues/OraSDPMEnginePendingRcvQ",
+              "remoteJNDIName": "Queues/OraSDPMEnginePendingRcvQ"
+            }
+          ],
+          "jndiProperties": "array(weblogic.j2ee.descriptor.wl.PropertyBean,[[MBeanServerInvocationHandler]com.bea:Name=datasource,Location=gmxdevfu_domain,Type=weblogic.j2ee.descriptor.wl.PropertyBean,Parent=[gmxdevfu_domain]/JMSSystemResources[UMSAQJMSSystemResource],Path=JMSResource[UMSAQJMSSystemResource]/ForeignServers[UMSAQJMSForeignServer]/JNDIProperties[datasource]]) "
+        }
+      ],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "BPMJMSModule",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "CubeCommandXAConnectionFactory",
+          "jndi": "jms/bpm/CubeCommandXAConnectionFactory",
+          "subdeployment": "CubeCommandXAConnectionFactory"
+        },
+        {
+          "name": "MeasurementTopicConnectionFactory",
+          "jndi": "jms/bpm/MeasurementTopicConnectionFactory",
+          "subdeployment": "MeasurementTopicConnectionFactory"
+        },
+        {
+          "name": "BeamActionXAConnectionFactory",
+          "jndi": "jms/bpm/BeamActionXAConnectionFactory",
+          "subdeployment": "BeamActionXAConnectionFactory"
+        },
+        {
+          "name": "BAMCommandXAConnectionFactory",
+          "jndi": "jms/bpm/BAMCommandXAConnectionFactory",
+          "subdeployment": "BAMCommandXAConnectionFactory"
+        },
+        {
+          "name": "PeopleQueryTopicConnectionFactory",
+          "jndi": "jms/bpm/PeopleQueryTopicConnectionFactory",
+          "subdeployment": "PeopleQueryTopicConnectionFactory"
+        },
+        {
+          "name": "PeopleQueryConnectionFactory",
+          "jndi": "jms/bpm/PeopleQueryConnectionFactory",
+          "subdeployment": "PeopleQueryConnectionFactory"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "soa_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "BPMJMSServer_auto_1"
+          ],
+          "name": "BPMJMSServer185813953"
+        }
+      ],
+      "quotas": [
+        {
+          "bytesMaximum": 800000000,
+          "name": "MeasurementQuota",
+          "shared": false,
+          "messagesMaximum": 1000000,
+          "policy": "FIFO"
+        }
+      ]
+    },
+    {
+      "topics": [],
+      "name": "SOAJMSModule",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "B2BEventQueueConnectionFactory",
+          "jndi": "jms/b2b/B2BEventQueueConnectionFactory",
+          "subdeployment": "B2BEventQueueConnectionFactory"
+        },
+        {
+          "name": "B2BQueueConnectionFactory",
+          "jndi": "jms/b2b/B2BQueueConnectionFactory",
+          "subdeployment": "B2BQueueConnectionFactory"
+        },
+        {
+          "name": "B2BBroadcastTopicConnectionFactory",
+          "jndi": "jms/b2b/B2BBroadcastTopicConnectionFactory",
+          "subdeployment": "B2BBroadcastTopicConnectionFactory"
+        },
+        {
+          "name": "TransportDispatcherQueueConnectionFactory",
+          "jndi": "jms/b2b/TransportDispatcherQueueConnectionFactory",
+          "subdeployment": "TransportDispatcherQueueConnectionFactory"
+        },
+        {
+          "name": "NotificationSenderQueueConnectionFactory",
+          "jndi": "jms/Queue/NotificationSenderQueueConnectionFactory",
+          "subdeployment": "NotificationSenderQueueConnectionFactory"
+        },
+        {
+          "name": "TestFwkQueueFactory",
+          "jndi": "jms/testfwk/TestFwkQueueFactory",
+          "subdeployment": "TestFwkQueueFactory"
+        },
+        {
+          "name": "EDNConnectionFactory",
+          "jndi": "jms/fabric/EDNConnectionFactory",
+          "subdeployment": "EDNConnectionFactory"
+        },
+        {
+          "name": "XAEDNConnectionFactory",
+          "jndi": "jms/fabric/xaEDNConnectionFactory",
+          "subdeployment": "XAEDNConnectionFactory"
+        },
+        {
+          "name": "XmlSchemaChangeNotificationConnectionFactory",
+          "jndi": "jms/fabric/XmlSchemaChangeNotificationConnectionFactory",
+          "subdeployment": "XmlSchemaChangeNotificationConnectionFactory"
+        },
+        {
+          "name": "TenantTopicConnectionFactory",
+          "jndi": "jms/fabric/TenantTopicConnectionFactory",
+          "subdeployment": "TenantTopicConnectionFactory"
+        },
+        {
+          "name": "CaseEventConnectionFactory",
+          "jndi": "jms/bpm/CaseEventConnectionFactory",
+          "subdeployment": "CaseEventConnectionFactory"
+        },
+        {
+          "name": "HCEventConnectionFactory",
+          "jndi": "jms/b2b/HCEventConnectionFactory",
+          "subdeployment": "HCEventConnectionFactory"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "soa_cluster"
+      ],
+      "foreignServers": [
+        {
+          "foreignConnectionFactories": [
+            {
+              "localJNDIName": "jms/fabric/EDNAQjmsTopicLocalTxConnectionFactory",
+              "name": "EDNAQjmsTopicLocalTxConnectionFactory",
+              "remoteJNDIName": "TopicConnectionFactory"
+            }
+          ],
+          "name": "EDNAQjmsLocalTxForeignServer",
+          "initialContextFactory": "oracle.jms.AQjmsInitialContextFactory",
+          "defaultTargetingEnabled": false,
+          "connectionURL": null,
+          "foreignDestinations": [],
+          "jndiProperties": "array(weblogic.j2ee.descriptor.wl.PropertyBean,[[MBeanServerInvocationHandler]com.bea:Name=datasource,Location=gmxdevfu_domain,Type=weblogic.j2ee.descriptor.wl.PropertyBean,Parent=[gmxdevfu_domain]/JMSSystemResources[SOAJMSModule],Path=JMSResource[SOAJMSModule]/ForeignServers[EDNAQjmsLocalTxForeignServer]/JNDIProperties[datasource]]) "
+        },
+        {
+          "foreignConnectionFactories": [
+            {
+              "localJNDIName": "jms/fabric/EDNAQjmsTopicXAConnectionFactory",
+              "name": "EDNAQjmsXATopicConnectionFactory",
+              "remoteJNDIName": "XATopicConnectionFactory"
+            }
+          ],
+          "name": "EDNAQjmsForeignServer",
+          "initialContextFactory": "oracle.jms.AQjmsInitialContextFactory",
+          "defaultTargetingEnabled": false,
+          "connectionURL": null,
+          "foreignDestinations": [
+            {
+              "localJNDIName": "jms/fabric/EDNAQjmsTopic",
+              "name": "EDNAQjmsTopic",
+              "remoteJNDIName": "Topics/EDN_AQJMS_TOPIC"
+            }
+          ],
+          "jndiProperties": "array(weblogic.j2ee.descriptor.wl.PropertyBean,[[MBeanServerInvocationHandler]com.bea:Name=datasource,Location=gmxdevfu_domain,Type=weblogic.j2ee.descriptor.wl.PropertyBean,Parent=[gmxdevfu_domain]/JMSSystemResources[SOAJMSModule],Path=JMSResource[SOAJMSModule]/ForeignServers[EDNAQjmsForeignServer]/JNDIProperties[datasource]]) "
+        }
+      ],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "SOAJMSServer_auto_1"
+          ],
+          "name": "SOAJMSServer-1703609110"
+        }
+      ],
+      "quotas": [
+        {
+          "bytesMaximum": 9223372036854775807,
+          "name": "EDNQuota",
+          "shared": false,
+          "messagesMaximum": 50000,
+          "policy": "FIFO"
+        }
+      ]
+    },
+    {
+      "topics": [],
+      "name": "jmsResources",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "wli.reporting.jmsprovider.ConnectionFactory",
+          "jndi": "wli.reporting.jmsprovider.ConnectionFactory",
+          "subdeployment": "wli.reporting.jmsprovider.ConnectionFactory"
+        },
+        {
+          "name": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory",
+          "jndi": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory",
+          "subdeployment": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory"
+        },
+        {
+          "name": "wli.reporting.jmsprovider.dequeue.ConnectionFactory",
+          "jndi": "wli.reporting.jmsprovider.dequeue.ConnectionFactory",
+          "subdeployment": "wli.reporting.jmsprovider.dequeue.ConnectionFactory"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [
+        {
+          "errorDestination": null,
+          "redeliveryLimit": null,
+          "name": "TemporaryTmplt",
+          "priority": null,
+          "redeliveryDelay": null,
+          "timeToLive": null
+        }
+      ],
+      "subdeployments": [
+        {
+          "targets": [
+            "wlsbJMSServer_auto_1"
+          ],
+          "name": "wlsbJMSServer-1696273528"
+        }
+      ],
+      "quotas": [
+        {
+          "bytesMaximum": 9223372036854775807,
+          "name": "QueueIn.Quota",
+          "shared": false,
+          "messagesMaximum": 9223372036854775807,
+          "policy": "FIFO"
+        }
+      ]
+    },
+    {
+      "topics": [],
+      "name": "OSBAQJMSServer",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [],
+      "foreignServers": [
+        {
+          "foreignConnectionFactories": [
+            {
+              "localJNDIName": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory",
+              "name": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory",
+              "remoteJNDIName": "XAQueueConnectionFactory"
+            },
+            {
+              "localJNDIName": "wli.reporting.jmsprovider.ConnectionFactory",
+              "name": "wli.reporting.jmsprovider.ConnectionFactory",
+              "remoteJNDIName": "XAQueueConnectionFactory"
+            },
+            {
+              "localJNDIName": "wli.reporting.jmsprovider.dequeue.ConnectionFactory",
+              "name": "wli.reporting.jmsprovider.dequeue.ConnectionFactory",
+              "remoteJNDIName": "XAQueueConnectionFactory"
+            },
+            {
+              "localJNDIName": "wli.reporting.jmsprovider.NonXAConnectionFactory",
+              "name": "wli.reporting.jmsprovider.NonXAConnectionFactory",
+              "remoteJNDIName": "QueueConnectionFactory"
+            }
+          ],
+          "name": "OSBAQJMSServer",
+          "initialContextFactory": "oracle.jms.AQjmsInitialContextFactory",
+          "defaultTargetingEnabled": false,
+          "connectionURL": null,
+          "foreignDestinations": [
+            {
+              "localJNDIName": "wlsb.internal.transport.task.queue.ftp",
+              "name": "wlsb.internal.transport.task.queue.ftp",
+              "remoteJNDIName": "Queues/OSB_FTP_TRANSPORT"
+            },
+            {
+              "localJNDIName": "wlsb.internal.transport.task.queue.sftp",
+              "name": "wlsb.internal.transport.task.queue.sftp",
+              "remoteJNDIName": "Queues/OSB_SFTP_TRANSPORT"
+            },
+            {
+              "localJNDIName": "wlsb.internal.transport.task.queue.email",
+              "name": "wlsb.internal.transport.task.queue.email",
+              "remoteJNDIName": "Queues/OSB_EMAIL_TRANSPORT"
+            },
+            {
+              "localJNDIName": "wlsb.internal.transport.task.queue.file",
+              "name": "wlsb.internal.transport.task.queue.file",
+              "remoteJNDIName": "Queues/OSB_FILE_TRANSPORT"
+            },
+            {
+              "localJNDIName": "QueueIn",
+              "name": "QueueIn",
+              "remoteJNDIName": "Queues/QUEUEIN"
+            },
+            {
+              "localJNDIName": "wli.reporting.jmsprovider.queue",
+              "name": "wli.reporting.jmsprovider.queue",
+              "remoteJNDIName": "Queues/OSB_REPORTING_PROVIDER"
+            },
+            {
+              "localJNDIName": "wli.reporting.jmsprovider_error.queue",
+              "name": "wli.reporting.jmsprovider_error.queue",
+              "remoteJNDIName": "Queues/OSB_REPORTING_ERROR"
+            },
+            {
+              "localJNDIName": "wli.reporting.purge.queue",
+              "name": "wli.reporting.purge.queue",
+              "remoteJNDIName": "Queues/OSB_REPORTING_PURGE"
+            }
+          ],
+          "jndiProperties": "array(weblogic.j2ee.descriptor.wl.PropertyBean,[[MBeanServerInvocationHandler]com.bea:Name=datasource,Location=gmxdevfu_domain,Type=weblogic.j2ee.descriptor.wl.PropertyBean,Parent=[gmxdevfu_domain]/JMSSystemResources[OSBAQJMSServer],Path=JMSResource[OSBAQJMSServer]/ForeignServers[OSBAQJMSServer]/JNDIProperties[datasource]]) "
+        }
+      ],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [],
+          "name": "OSBAQJMSSubDeployment"
+        }
+      ],
+      "quotas": []
+    }
+  ],
+  "systemSafAgents": [],
+  "systemConnectionFactories": [],
+  "systemSafImportedDestinations": [],
+  "systemInfrastructure": {
+    "migratableTargets": [
+      {
+        "cluster": "soa_cluster",
+        "migrationPolicy": "manual",
+        "name": "soa_server1 (migratable)",
+        "userPreferredServer": "soa_server1"
+      },
+      {
+        "cluster": "osb_cluster",
+        "migrationPolicy": "manual",
+        "name": "osb_server1 (migratable)",
+        "userPreferredServer": "osb_server1"
+      }
+    ],
+    "jdbcDataSources": [
+      {
+        "maxCapacity": 75,
+        "minCapacity": 1,
+        "name": "WLSSchemaDataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_WLS_RUNTIME"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster",
+          "osb_cluster",
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/WLSSchemaDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 200,
+        "minCapacity": 0,
+        "name": "LocalSvcTblDataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_STB"
+          },
+          {
+            "name": "oracle.net.CONNECT_TIMEOUT",
+            "value": "10000"
+          },
+          {
+            "name": "SendStreamAsBlob",
+            "value": "true"
+          },
+          {
+            "name": "weblogic.jdbc.crossPartitionEnabled",
+            "value": "true"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 0,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/LocalSvcTblDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "opss-data-source",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_OPSS"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster",
+          "osb_cluster",
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/OpssDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "opss-audit-viewDS",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_IAU_VIEWER"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster",
+          "osb_cluster",
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/AuditViewDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "opss-audit-DBDS",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_IAU_APPEND"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster",
+          "osb_cluster",
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/AuditAppendDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 0,
+        "name": "mds-owsm",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_MDS"
+          },
+          {
+            "name": "oracle.net.CONNECT_TIMEOUT",
+            "value": "120000"
+          },
+          {
+            "name": "SendStreamAsBlob",
+            "value": "true"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster",
+          "osb_cluster",
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 0,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/mds/owsm"
+        ]
+      },
+      {
+        "maxCapacity": 300,
+        "minCapacity": 0,
+        "name": "OraSDPMDataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_UMS"
+          },
+          {
+            "name": "oracle.net.CONNECT_TIMEOUT",
+            "value": "10000"
+          },
+          {
+            "name": "SendStreamAsBlob",
+            "value": "true"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster",
+          "osb_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 0,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/OraSDPMDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 20,
+        "minCapacity": 0,
+        "name": "EDNDataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_SOAINFRA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 0,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/EDNDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 20,
+        "minCapacity": 0,
+        "name": "EDNLocalTxDataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_SOAINFRA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 0,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/EDNLocalTxDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 50,
+        "minCapacity": 0,
+        "name": "mds-soa",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_MDS"
+          },
+          {
+            "name": "SendStreamAsBlob",
+            "value": "true"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster",
+          "AdminServer",
+          "osb_cluster"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 0,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/mds/MDS_LocalTxDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 300,
+        "minCapacity": 5,
+        "name": "wlsbjmsrpDataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_SOAINFRA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "osb_cluster",
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 5,
+        "passwordExported": false,
+        "jndiNames": [
+          "wlsbjmsrpDataSource"
+        ]
+      },
+      {
+        "maxCapacity": 20,
+        "minCapacity": 5,
+        "name": "SOADataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_SOAINFRA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "osb_cluster",
+          "soa_cluster",
+          "AdminServer"
+        ],
+        "globalTransactionsProtocol": "LoggingLastResource",
+        "initialCapacity": 5,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SOADataSource"
+        ]
+      },
+      {
+        "maxCapacity": 50,
+        "minCapacity": 0,
+        "name": "SOALocalTxDataSource",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=havut049.uk.ssegroup.net)(PORT=1526)))(CONNECT_DATA=(SERVICE_NAME=dbmrdv01)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "GMX_SOAINFRA"
+          },
+          {
+            "name": "oracle.net.CONNECT_TIMEOUT",
+            "value": "10000"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "None",
+        "initialCapacity": 0,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SOALocalTxDataSource"
+        ]
+      }
+    ],
+    "persistentStores": [
+      {
+        "prefixName": null,
+        "directory": "store/gmds",
+        "targets": [],
+        "name": "mds-owsm",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": "store/gmds/mds-soa",
+        "targets": [
+          "AdminServer"
+        ],
+        "name": "mds-soa",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": "BPMJMSFileStore_auto_1",
+        "targets": [
+          "soa_server1 (migratable)"
+        ],
+        "name": "BPMJMSFileStore_auto_1",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": "SOAJMSFileStore_auto_1",
+        "targets": [
+          "soa_server1 (migratable)"
+        ],
+        "name": "SOAJMSFileStore_auto_1",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": "UMSJMSFileStore_auto_1",
+        "targets": [
+          "soa_server1 (migratable)"
+        ],
+        "name": "UMSJMSFileStore_auto_1",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": "UMSJMSFileStore_auto_2",
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "name": "UMSJMSFileStore_auto_2",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": "FileStore_auto_1",
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "name": "FileStore_auto_1",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": "SOA",
+        "directory": null,
+        "targets": [],
+        "name": "SOAJMSJDBCStore",
+        "type": "JDBCStore",
+        "synchronousWritePolicy": null,
+        "dataSource": "WLSSchemaDataSource"
+      },
+      {
+        "prefixName": "BPM",
+        "directory": null,
+        "targets": [],
+        "name": "BPMJMSJDBCStore",
+        "type": "JDBCStore",
+        "synchronousWritePolicy": null,
+        "dataSource": "WLSSchemaDataSource"
+      },
+      {
+        "prefixName": "OSB",
+        "directory": null,
+        "targets": [],
+        "name": "OSBJMSJDBCStore",
+        "type": "JDBCStore",
+        "synchronousWritePolicy": null,
+        "dataSource": "WLSSchemaDataSource"
+      },
+      {
+        "prefixName": "UMS",
+        "directory": null,
+        "targets": [],
+        "name": "UMSJMSJDBCStore",
+        "type": "JDBCStore",
+        "synchronousWritePolicy": null,
+        "dataSource": "WLSSchemaDataSource"
+      }
+    ],
+    "jmsServers": [
+      {
+        "targets": [
+          "soa_server1 (migratable)"
+        ],
+        "persistentStore": "BPMJMSFileStore_auto_1",
+        "bytesMaximum": -1,
+        "name": "BPMJMSServer_auto_1",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "soa_server1 (migratable)"
+        ],
+        "persistentStore": "SOAJMSFileStore_auto_1",
+        "bytesMaximum": -1,
+        "name": "SOAJMSServer_auto_1",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "soa_server1 (migratable)"
+        ],
+        "persistentStore": "UMSJMSFileStore_auto_1",
+        "bytesMaximum": -1,
+        "name": "UMSJMSServer_auto_1",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "persistentStore": "UMSJMSFileStore_auto_2",
+        "bytesMaximum": -1,
+        "name": "UMSJMSServer_auto_2",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "persistentStore": "FileStore_auto_1",
+        "bytesMaximum": -1,
+        "name": "wlsbJMSServer_auto_1",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      }
+    ]
+  },
+  "adapterDeployments": [
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "FileAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/FileAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "SocketAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/SocketAdapter.rar"
+    },
+    {
+      "targets": [
+        "soa_cluster"
+      ],
+      "name": "MQSeriesAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/MQSeriesAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "OracleBamAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/OracleBamAdapter.rar"
+    },
+    {
+      "targets": [
+        "soa_cluster"
+      ],
+      "name": "UMSAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/UMSAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "CoherenceAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/CoherenceAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "LdapAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/LdapAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "MSMQAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/MSMQAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "SAPAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/SAPAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "SiebelAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/SiebelAdapter.rar"
+    },
+    {
+      "targets": [
+        "soa_cluster"
+      ],
+      "name": "OracleAppsAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/AppsAdapter.rar"
+    },
+    {
+      "targets": [],
+      "name": "JDEWorldAdapter",
+      "planPath": null,
+      "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/JDEWorldAdapter.rar"
+    }
+  ],
+  "adapterRuntimePools": [],
+  "safRemoteContexts": {},
+  "soaInternalQueues": [
+    {
+      "name": "OraSDPMEngineSndQ1",
+      "source": "dist_OraSDPM/Queues/OraSDPMEngineSndQ1_auto"
+    },
+    {
+      "name": "OraSDPMEngineRcvQ1",
+      "source": "dist_OraSDPM/Queues/OraSDPMEngineRcvQ1_auto"
+    },
+    {
+      "name": "OraSDPMDriverDefSndQ1",
+      "source": "dist_OraSDPM/Queues/OraSDPMDriverDefSndQ1_auto"
+    },
+    {
+      "name": "OraSDPMAppDefRcvQ1",
+      "source": "dist_OraSDPM/Queues/OraSDPMAppDefRcvQ1_auto"
+    },
+    {
+      "name": "OraSDPMAppDefRcvErrorQ1",
+      "source": "dist_OraSDPM/Queues/OraSDPMAppDefRcvErrorQ1_auto"
+    },
+    {
+      "name": "OraSDPMWSRcvQ1",
+      "source": "dist_OraSDPM/Queues/OraSDPMWSRcvQ1_auto"
+    },
+    {
+      "name": "OraSDPMEnginePendingRcvQ",
+      "source": "dist_OraSDPM/Queues/OraSDPMEnginePendingRcvQ_auto"
+    },
+    {
+      "name": "dist_MeasurementTopic",
+      "source": "dist_MeasurementTopic_auto"
+    },
+    {
+      "name": "dist_PeopleQueryTopic",
+      "source": "dist_PeopleQueryTopic_auto"
+    },
+    {
+      "name": "dist_TestFwkQueue",
+      "source": "dist_TestFwkQueue_auto"
+    },
+    {
+      "name": "dist_NotificationSenderQueue",
+      "source": "dist_NotificationSenderQueue_auto"
+    },
+    {
+      "name": "dist_B2BEventQueue",
+      "source": "dist_B2BEventQueue_auto"
+    },
+    {
+      "name": "dist_TransportDispatcherQueue",
+      "source": "dist_TransportDispatcherQueue_auto"
+    },
+    {
+      "name": "dist_B2B_IN_QUEUE",
+      "source": "dist_B2B_IN_QUEUE_auto"
+    },
+    {
+      "name": "dist_B2B_OUT_QUEUE",
+      "source": "dist_B2B_OUT_QUEUE_auto"
+    },
+    {
+      "name": "dist_EDNQueue",
+      "source": "dist_EDNQueue_auto"
+    },
+    {
+      "name": "dist_CaseEventQueue",
+      "source": "dist_CaseEventQueue_auto"
+    },
+    {
+      "name": "dist_HCInboundQueue",
+      "source": "dist_HCInboundQueue_auto"
+    },
+    {
+      "name": "dist_HCOutboundQueue",
+      "source": "dist_HCOutboundQueue_auto"
+    },
+    {
+      "name": "dist_HCAuditQueue",
+      "source": "dist_HCAuditQueue_auto"
+    },
+    {
+      "name": "dist_B2BBroadcastTopic",
+      "source": "dist_B2BBroadcastTopic_auto"
+    },
+    {
+      "name": "dist_EDNTopic",
+      "source": "dist_EDNTopic_auto"
+    },
+    {
+      "name": "dist_TenantTopic",
+      "source": "dist_TenantTopic_auto"
+    },
+    {
+      "name": "dist_XmlSchemaChangeNotificationTopic",
+      "source": "dist_XmlSchemaChangeNotificationTopic_auto"
+    },
+    {
+      "name": "dist_wlsb.internal.transport.task.queue.ftp",
+      "source": "dist_wlsb.internal.transport.task.queue.ftp_auto"
+    },
+    {
+      "name": "dist_wlsb.internal.transport.task.queue.sftp",
+      "source": "dist_wlsb.internal.transport.task.queue.sftp_auto"
+    },
+    {
+      "name": "dist_wlsb.internal.transport.task.queue.email",
+      "source": "dist_wlsb.internal.transport.task.queue.email_auto"
+    },
+    {
+      "name": "dist_wlsb.internal.transport.task.queue.file",
+      "source": "dist_wlsb.internal.transport.task.queue.file_auto"
+    },
+    {
+      "name": "dist_QueueIn",
+      "source": "dist_QueueIn_auto"
+    },
+    {
+      "name": "dist_wli.reporting.jmsprovider.queue",
+      "source": "dist_wli.reporting.jmsprovider.queue_auto"
+    },
+    {
+      "name": "dist_wli.reporting.jmsprovider_error.queue",
+      "source": "dist_wli.reporting.jmsprovider_error.queue_auto"
+    },
+    {
+      "name": "dist_wli.reporting.purge.queue",
+      "source": "dist_wli.reporting.purge.queue_auto"
+    }
+  ]
+}

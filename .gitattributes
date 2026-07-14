@@ -1,0 +1,6 @@
+# All text files are checked in to the repository with LF
+* text=auto
+
+# These files are checked out using CRLF locally
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf

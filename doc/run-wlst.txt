@@ -1,0 +1,2 @@
+
+$MW_HOME/oracle_common/common/bin/wlst.sh extract_jms_saf.py
