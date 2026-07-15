@@ -18,9 +18,10 @@ in order — later phases depend on objects created in earlier ones.
 - `JMS_DB_Store` references `SOALocalTxDataSource`, which is a SOA system data
   source and should already exist on the target domain. If it does not, create
   it first via the RCU schema or domain template.
-- Several connection factories reference subdeployments
-  (`MNSAFConnectionFactory`, `MNSOARemoteCF`, `WAMJMSConnectionFactory`) that
-  were not captured in the extract — see the note in each module below.
+- Three connection factories (`MNSAFConnectionFactory`, `MNSOARemoteCF`,
+  `WAMJMSConnectionFactory`) use **default targeting** — they inherit their
+  module's target rather than using a subdeployment. Confirmed via diagnostic
+  (`DefaultTargetingEnabled=true`). See the note in each module below.
 
 ---
 
