@@ -351,8 +351,10 @@ def load_infrastructure(data, env):
     print ''
     print '=== Phase 1: Infrastructure ==='
 
-    edit()
-    startEdit()
+    dry_run = _is_dry_run(env)
+    if not dry_run:
+        edit()
+        startEdit()
     try:
         print ''
         print '-- JDBC data sources --'
@@ -370,15 +372,16 @@ def load_infrastructure(data, env):
         print '-- Migratable targets --'
         _load_migratable_targets(data, env)
 
-        if not _is_dry_run(env):
+        if not dry_run:
             save()
             activate()
             print ''
             print 'Phase 1 activated OK'
     except Exception:
         print 'ERROR in Phase 1: ' + str(sys.exc_info()[1])
-        try:
-            cancelEdit('y')
-        except Exception:
-            pass
+        if not dry_run:
+            try:
+                cancelEdit('y')
+            except Exception:
+                pass
         raise

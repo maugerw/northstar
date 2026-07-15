@@ -333,8 +333,10 @@ def load_jms_modules(data, env):
 
     modules = get_list(data, 'jmsModules')
 
-    edit()
-    startEdit()
+    dry_run = _is_dry_run(env)
+    if not dry_run:
+        edit()
+        startEdit()
     try:
         for module in modules:
             module_name = get_str(module, 'name')
@@ -375,15 +377,16 @@ def load_jms_modules(data, env):
             print '  -- SAF error handlings --'
             _load_saf_error_handlings(module_name, get_list(module, 'safErrorHandlings'))
 
-        if not _is_dry_run(env):
+        if not dry_run:
             save()
             activate()
             print ''
             print 'Phase 2 activated OK'
     except Exception:
         print 'ERROR in Phase 2: ' + str(sys.exc_info()[1])
-        try:
-            cancelEdit('y')
-        except Exception:
-            pass
+        if not dry_run:
+            try:
+                cancelEdit('y')
+            except Exception:
+                pass
         raise
