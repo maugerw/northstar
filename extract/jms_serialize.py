@@ -60,13 +60,21 @@ def to_long(value):
             return str(value)
 
 def to_boolean(value):
-    # Convert a WLST boolean/Boolean to a real Python bool for JSON output.
+    # Convert a WLST boolean to a real Python bool for JSON output.
+    #
+    # WLST/Jython represents booleans inconsistently: a Java Boolean stringifies
+    # to 'true'/'false', but a Java primitive boolean surfaces under Jython 2.2
+    # (which has no real bool type) as the int 1/0, stringifying to '1'/'0'.
+    # The original check (str(value).lower() == 'true') therefore reported EVERY
+    # genuinely-true primitive boolean as False (e.g. isDefaultTargetingEnabled
+    # returns 1, '1' != 'true'). Accept all common truthy representations.
     if value is None:
         return None
     try:
-        return str(value).lower() == 'true'
+        s = str(value).strip().lower()
     except Exception:
         return None
+    return s in ('true', '1', 'yes', 'on', 't', 'y')
 
 def _is_dict(obj):
     # type()-based check so we never pass a possibly-non-class object to
