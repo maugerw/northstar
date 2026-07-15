@@ -121,7 +121,12 @@ try:
                 print '   DefaultTargetingEnabled= ' + str(cmo.isDefaultTargetingEnabled())
             except Exception:
                 print '   DefaultTargetingEnabled= <no accessor>'
-            print '   Targets                = ' + str(names_of(cmo.getTargets()))
+            # A ConnectionFactory MBean has no getTargets() accessor (targeting
+            # is via subdeployment or default targeting only), so guard it.
+            try:
+                print '   Targets                = ' + str(names_of(cmo.getTargets()))
+            except Exception:
+                print '   Targets                = <no getTargets() accessor on CF>'
         except Exception:
             print '   (could not read CF at ' + cf_path + ': ' + str(sys.exc_info()[1]) + ')'
 
