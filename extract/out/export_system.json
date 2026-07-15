@@ -7,6 +7,7 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
+          "targets": [],
           "name": "OraSDPM/QueueConnectionFactory",
           "jndi": "OraSDPM/QueueConnectionFactory",
           "defaultTargetingEnabled": false,
@@ -118,36 +119,42 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
+          "targets": [],
           "name": "CubeCommandXAConnectionFactory",
           "jndi": "jms/bpm/CubeCommandXAConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "CubeCommandXAConnectionFactory"
         },
         {
+          "targets": [],
           "name": "MeasurementTopicConnectionFactory",
           "jndi": "jms/bpm/MeasurementTopicConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "MeasurementTopicConnectionFactory"
         },
         {
+          "targets": [],
           "name": "BeamActionXAConnectionFactory",
           "jndi": "jms/bpm/BeamActionXAConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "BeamActionXAConnectionFactory"
         },
         {
+          "targets": [],
           "name": "BAMCommandXAConnectionFactory",
           "jndi": "jms/bpm/BAMCommandXAConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "BAMCommandXAConnectionFactory"
         },
         {
+          "targets": [],
           "name": "PeopleQueryTopicConnectionFactory",
           "jndi": "jms/bpm/PeopleQueryTopicConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "PeopleQueryTopicConnectionFactory"
         },
         {
+          "targets": [],
           "name": "PeopleQueryConnectionFactory",
           "jndi": "jms/bpm/PeopleQueryConnectionFactory",
           "defaultTargetingEnabled": false,
@@ -189,72 +196,84 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
+          "targets": [],
           "name": "B2BEventQueueConnectionFactory",
           "jndi": "jms/b2b/B2BEventQueueConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "B2BEventQueueConnectionFactory"
         },
         {
+          "targets": [],
           "name": "B2BQueueConnectionFactory",
           "jndi": "jms/b2b/B2BQueueConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "B2BQueueConnectionFactory"
         },
         {
+          "targets": [],
           "name": "B2BBroadcastTopicConnectionFactory",
           "jndi": "jms/b2b/B2BBroadcastTopicConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "B2BBroadcastTopicConnectionFactory"
         },
         {
+          "targets": [],
           "name": "TransportDispatcherQueueConnectionFactory",
           "jndi": "jms/b2b/TransportDispatcherQueueConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "TransportDispatcherQueueConnectionFactory"
         },
         {
+          "targets": [],
           "name": "NotificationSenderQueueConnectionFactory",
           "jndi": "jms/Queue/NotificationSenderQueueConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "NotificationSenderQueueConnectionFactory"
         },
         {
+          "targets": [],
           "name": "TestFwkQueueFactory",
           "jndi": "jms/testfwk/TestFwkQueueFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "TestFwkQueueFactory"
         },
         {
+          "targets": [],
           "name": "EDNConnectionFactory",
           "jndi": "jms/fabric/EDNConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "EDNConnectionFactory"
         },
         {
+          "targets": [],
           "name": "XAEDNConnectionFactory",
           "jndi": "jms/fabric/xaEDNConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "XAEDNConnectionFactory"
         },
         {
+          "targets": [],
           "name": "XmlSchemaChangeNotificationConnectionFactory",
           "jndi": "jms/fabric/XmlSchemaChangeNotificationConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "XmlSchemaChangeNotificationConnectionFactory"
         },
         {
+          "targets": [],
           "name": "TenantTopicConnectionFactory",
           "jndi": "jms/fabric/TenantTopicConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "TenantTopicConnectionFactory"
         },
         {
+          "targets": [],
           "name": "CaseEventConnectionFactory",
           "jndi": "jms/bpm/CaseEventConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "CaseEventConnectionFactory"
         },
         {
+          "targets": [],
           "name": "HCEventConnectionFactory",
           "jndi": "jms/b2b/HCEventConnectionFactory",
           "defaultTargetingEnabled": false,
@@ -333,18 +352,21 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
+          "targets": [],
           "name": "wli.reporting.jmsprovider.ConnectionFactory",
           "jndi": "wli.reporting.jmsprovider.ConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "wli.reporting.jmsprovider.ConnectionFactory"
         },
         {
+          "targets": [],
           "name": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory",
           "jndi": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory",
           "defaultTargetingEnabled": false,
           "subdeployment": "weblogic.wlsb.jms.transporttask.QueueConnectionFactory"
         },
         {
+          "targets": [],
           "name": "wli.reporting.jmsprovider.dequeue.ConnectionFactory",
           "jndi": "wli.reporting.jmsprovider.dequeue.ConnectionFactory",
           "defaultTargetingEnabled": false,

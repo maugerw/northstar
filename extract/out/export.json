@@ -273,6 +273,7 @@
       ],
       "connectionFactories": [
         {
+          "targets": [],
           "name": "MNSAFConnectionFactory",
           "jndi": "jms/MNSAFConnectionFactory",
           "defaultTargetingEnabled": false,
@@ -316,6 +317,7 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
+          "targets": [],
           "name": "MNSOARemoteCF",
           "jndi": "jms/MNSOARemoteCF",
           "defaultTargetingEnabled": false,
@@ -349,6 +351,7 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
+          "targets": [],
           "name": "WAMJMSConnectionFactory",
           "jndi": "jms/WAM_JMS_CF",
           "defaultTargetingEnabled": false,
