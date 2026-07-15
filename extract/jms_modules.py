@@ -172,6 +172,12 @@ def extract_jms_modules(cmo, extract_data, system_data):
             # uses this to decide whether a dangling subdeployment reference is
             # a warning or benign default targeting.
             cf_dict["defaultTargetingEnabled"] = safe(cf, 'isDefaultTargetingEnabled', to_boolean)
+            # Capture the CF's actual resolved targets. This disambiguates a
+            # non-resolving subDeploymentName: if targets is non-empty the CF
+            # is genuinely targeted (the subdeployment exists even if
+            # getSubDeployments() did not enumerate it); if empty and not
+            # default-targeted, the reference is genuinely dangling.
+            cf_dict["targets"] = get_targets(cf)
 
             module_dict["connectionFactories"].append(cf_dict)
 
