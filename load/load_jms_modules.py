@@ -228,10 +228,18 @@ def _load_connection_factories(module_name, cfs):
         cd('ConnectionFactories/' + name)
         jndi = get_str(cf, 'jndi')
         subdeployment = get_str(cf, 'subdeployment')
+        default_targeting = get(cf, 'defaultTargetingEnabled')
         if jndi:
             cmo.setJNDIName(jndi)
         if subdeployment and subdeployment != 'None':
+            # Explicit subdeployment targeting.
             cmo.setSubDeploymentName(subdeployment)
+        elif default_targeting:
+            # No subdeployment: CF inherits the module target directly.
+            try:
+                cmo.setDefaultTargetingEnabled(True)
+            except Exception:
+                print '    WARNING: could not enable default targeting for CF "' + name + '": ' + str(sys.exc_info()[1])
 
 
 # ---------------------------------------------------------------------------

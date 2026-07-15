@@ -165,6 +165,13 @@ def extract_jms_modules(cmo, extract_data, system_data):
             cf_dict["name"] = cf_name
             cf_dict["jndi"] = str(cf.getJNDIName())
             cf_dict["subdeployment"] = str(cf.getSubDeploymentName())
+            # Capture whether the CF targets the module's target directly
+            # (default targeting) rather than via a subdeployment. When this is
+            # true, a subdeployment name that does not resolve to a real
+            # subdeployment object is expected, not a gap - validate_references
+            # uses this to decide whether a dangling subdeployment reference is
+            # a warning or benign default targeting.
+            cf_dict["defaultTargetingEnabled"] = safe(cf, 'isDefaultTargetingEnabled', to_boolean)
 
             module_dict["connectionFactories"].append(cf_dict)
 

@@ -180,6 +180,28 @@ def validate_references(extract_data):
                     )
                     d["subdeployment"] = None
 
+        # Connection factories reference a subdeployment by name. A CF that
+        # uses default targeting (defaultTargetingEnabled=true) legitimately
+        # carries a subdeployment name that does not resolve to a real
+        # subdeployment object, so that case is left untouched. Only a
+        # non-default-targeted CF with a dangling subdeployment reference is
+        # nulled and warned about.
+        for cf in m["connectionFactories"]:
+            sub = cf.get("subdeployment")
+            if sub is not None and sub != '' and sub != 'None' and sub not in module_subdeps:
+                if cf.get("defaultTargetingEnabled"):
+                    # Benign: CF inherits the module target. Null the
+                    # non-resolving subdeployment name so the import wires
+                    # default targeting rather than a missing subdeployment.
+                    cf["subdeployment"] = None
+                else:
+                    validation_warnings.append(
+                        'ConnectionFactory "' + cf["name"] + '" in module "' + m["name"] +
+                        '" references missing subdeployment "' + sub + '" and is not ' +
+                        'default-targeted - reference nulled (review targeting on source)'
+                    )
+                    cf["subdeployment"] = None
+
         # Templates only carry an errorDestination reference (not a
         # subdeployment).
         for t in m["templates"]:
