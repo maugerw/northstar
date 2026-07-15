@@ -1,0 +1,63 @@
+
+Location changed to domainConfig tree. This is a read-only tree
+with DomainMBean as the root MBean.
+For more help, use help('domainConfig')
+
+
+========================================================
+MODULE: MNSAFJMSModule   CF: MNSAFConnectionFactory
+========================================================
+
+1. module.getSubDeployments() names:
+   ['MNSAFSubDeployment']
+
+2. ls of /JMSSystemResources/MNSAFJMSModule/SubDeployments :
+dr--   MNSAFSubDeployment
+
+
+3. CF attributes:
+   SubDeploymentName      = MNSAFConnectionFactory
+   DefaultTargetingEnabled= 1
+
+4. direct navigate to SubDeployments/MNSAFConnectionFactory :
+No stack trace available.
+   does NOT resolve: Error cding to the MBean
+
+========================================================
+MODULE: MNSOARemoteJMSModule   CF: MNSOARemoteCF
+========================================================
+
+1. module.getSubDeployments() names:
+   ['MNSOARemoteSubDeploymentJmsModule']
+
+2. ls of /JMSSystemResources/MNSOARemoteJMSModule/SubDeployments :
+dr--   MNSOARemoteSubDeploymentJmsModule
+
+
+3. CF attributes:
+   SubDeploymentName      = MNSOARemoteCF
+   DefaultTargetingEnabled= 1
+
+4. direct navigate to SubDeployments/MNSOARemoteCF :
+No stack trace available.
+   does NOT resolve: Error cding to the MBean
+
+========================================================
+MODULE: WAMJMSModule   CF: WAMJMSConnectionFactory
+========================================================
+
+1. module.getSubDeployments() names:
+   ['WAM_JMS_Subdeployment']
+
+2. ls of /JMSSystemResources/WAMJMSModule/SubDeployments :
+dr--   WAM_JMS_Subdeployment
+
+
+3. CF attributes:
+   SubDeploymentName      = WAMJMSConnectionFactory
+   DefaultTargetingEnabled= 1
+
+4. direct navigate to SubDeployments/WAMJMSConnectionFactory :
+No stack trace available.
+   does NOT resolve: Error cding to the MBean
+Disconnected from weblogic server: AdminServer
