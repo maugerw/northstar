@@ -67,7 +67,12 @@
       "name": "DbAdapter",
       "planPath": "/gmxdevfu/products/middleware/soa/soa/XrefPlan.xml",
       "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/DbAdapter.rar",
-      "connectionInstances": null
+      "connectionInstances": [
+        "eis/DB/SIMSOMSIntegration_XA",
+        "eis/DB/WAM_XXCUST",
+        "eis/DB/WAM_XXCUST_XA",
+        "eis/DB/XREF"
+      ]
     },
     {
       "targets": [
@@ -78,7 +83,12 @@
       "name": "JmsAdapter",
       "planPath": "/gmxdevfu/products/middleware/soa/soa/Plan.xml",
       "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/JmsAdapter.rar",
-      "connectionInstances": null
+      "connectionInstances": [
+        "eis/jms/MNSAFConnectionFactory",
+        "eis/jms/MNSOARemoteCF",
+        "eis/jms/WAM_Chime_JMS_Q",
+        "eis/jms/WAM_EH_JMS_Q"
+      ]
     },
     {
       "targets": [
@@ -89,7 +99,9 @@
       "name": "AqAdapter",
       "planPath": "/gmxdevfu/products/middleware/soa/soa/AQPlan.xml",
       "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/AqAdapter.rar",
-      "connectionInstances": null
+      "connectionInstances": [
+        "eis/AQ/CommonAuditLog"
+      ]
     },
     {
       "targets": [
@@ -100,7 +112,9 @@
       "name": "FtpAdapter",
       "planPath": "/gmxdevfu/products/middleware/soa/soa/EO_Plan.xml",
       "sourcePath": "/gmxdevfu/products/middleware/soa/soa/connectors/FtpAdapter.rar",
-      "connectionInstances": null
+      "connectionInstances": [
+        "eis/Ftp/EO_FtpAdapter"
+      ]
     }
   ],
   "jmsModules": [

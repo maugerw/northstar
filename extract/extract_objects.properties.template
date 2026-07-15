@@ -1,0 +1,22 @@
+# extract_jms.properties
+#
+# Environment-specific settings for extract_jms.py.
+# Keep this file OUT of source control if it contains a real password
+# (prefer a WLST user-config file in shared/CI environments).
+#
+# Lines beginning with '#' or ';' are comments. Blank lines are ignored.
+# Values are read verbatim (no quoting required); surrounding whitespace is
+# trimmed. The script looks for this file next to extract_jms.py by default,
+# or at the path given as the first command-line argument:
+#
+#   wlst extract_jms.py [path/to/extract_jms.properties]
+
+# --- Admin Server connection ---
+admin.user=
+admin.password=
+admin.url=
+
+# --- Domain / output locations ---
+domain.path=
+output.file=
+system.output.file=
