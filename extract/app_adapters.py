@@ -9,9 +9,12 @@ from jms_serialize import safe, to_long
 def _sort_strings(items):
     # Return a sorted copy of a list of plain strings. Returns an empty list
     # rather than None when items is empty/None so callers always get a list.
+    # Uses list.sort() rather than sorted() for Jython 2.2 compatibility.
     if not items:
         return []
-    return sorted(items)
+    result = list(items)
+    result.sort()
+    return result
 
 def extract_adapters(cmo, extract_data, system_data):
     print 'Extracting Adapters...'
