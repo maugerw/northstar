@@ -317,14 +317,14 @@ _(No queues, topics, or connection factories.)_
 
 **Connection Factories:**
 
-| Name | JNDI | Subdeployment |
+| Name | JNDI | Targeting |
 |---|---|---|
-| `MNSAFConnectionFactory` | `jms/MNSAFConnectionFactory` | `MNSAFConnectionFactory` |
+| `MNSAFConnectionFactory` | `jms/MNSAFConnectionFactory` | **Default targeting** (inherits module target `osb_cluster`) |
 
-> ⚠️ The subdeployment `MNSAFConnectionFactory` was not captured in the extract
-> (only `MNSAFSubDeployment` was). Check the source domain: the CF may use
-> default targeting (inheriting the module target `osb_cluster`), or a
-> same-named subdeployment targeting `osb_cluster` may need to be created.
+> Confirmed via diagnostic: `DefaultTargetingEnabled=true`. Tick "Default
+> Targeting" on the CF — do NOT create a subdeployment for it. (The extract's
+> stored `SubDeploymentName` of the CF's own name is WebLogic's inert
+> placeholder and is ignored when default targeting is on.)
 
 **SAF Error Handlings:**
 
@@ -352,12 +352,12 @@ _(No queues, topics, or connection factories.)_
 
 **Connection Factories:**
 
-| Name | JNDI | Subdeployment |
+| Name | JNDI | Targeting |
 |---|---|---|
-| `MNSOARemoteCF` | `jms/MNSOARemoteCF` | `MNSOARemoteCF` |
+| `MNSOARemoteCF` | `jms/MNSOARemoteCF` | **Default targeting** (inherits module target `soa_cluster`) |
 
-> ⚠️ Same note as MNSAFJMSModule: subdeployment `MNSOARemoteCF` not in extract.
-> Verify targeting on source domain before recreating.
+> Confirmed via diagnostic: `DefaultTargetingEnabled=true`. Tick "Default
+> Targeting"; do NOT create a subdeployment.
 
 ---
 
@@ -373,11 +373,12 @@ _(No queues, topics, or connection factories.)_
 
 **Connection Factories:**
 
-| Name | JNDI | Subdeployment |
+| Name | JNDI | Targeting |
 |---|---|---|
-| `WAMJMSConnectionFactory` | `jms/WAM_JMS_CF` | `WAMJMSConnectionFactory` |
+| `WAMJMSConnectionFactory` | `jms/WAM_JMS_CF` | **Default targeting** (inherits module target `osb_cluster`) |
 
-> ⚠️ Same note: subdeployment `WAMJMSConnectionFactory` not in extract.
+> Confirmed via diagnostic: `DefaultTargetingEnabled=true`. Tick "Default
+> Targeting"; do NOT create a subdeployment.
 
 **Queues:**
 
@@ -485,7 +486,7 @@ environment.
 | Item | Detail |
 |---|---|
 | JDBC passwords | All 6 data sources — supply from vault/source team |
-| CF subdeployments | `MNSAFConnectionFactory`, `MNSOARemoteCF`, `WAMJMSConnectionFactory` — verify targeting on source before recreating |
+| ~~CF subdeployments~~ | RESOLVED — `MNSAFConnectionFactory`, `MNSOARemoteCF`, `WAMJMSConnectionFactory` are default-targeted (confirmed via diagnostic), not dangling. Use default targeting, no subdeployment. |
 | `JMS_DB_Store` data source | References `SOALocalTxDataSource` (system DS) — must pre-exist on target |
 | Adapter connection instance credentials | FTP host/user/password (`EO_FtpAdapter`), DB credentials inside XrefPlan/AQPlan, JMS credentials inside Plan.xml |
 | SAF agents with no targets | `GIS_PublishChangeSet_SAF` and `MNSAFAgent` have empty target lists — verify this is intentional on source |
