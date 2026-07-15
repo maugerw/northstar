@@ -1,0 +1,77 @@
+# load_objects.properties.template
+#
+# Copy to load_objects.properties (or another name) and fill in the values
+# for the target environment.  Pass a non-default path as the first argument:
+#
+#   wlst.sh load_objects.py /path/to/my-env.properties
+
+# ---------------------------------------------------------------------------
+# Required: admin server connection
+# ---------------------------------------------------------------------------
+admin.user=weblogic
+admin.password=
+admin.url=t3://hostname:7001
+
+# ---------------------------------------------------------------------------
+# Required: path to the extract file produced by extract_objects.py
+# ---------------------------------------------------------------------------
+input.file=/path/to/export.json
+
+# ---------------------------------------------------------------------------
+# Optional: dry run (log what would be created without making changes)
+# ---------------------------------------------------------------------------
+#dry.run=true
+
+# ---------------------------------------------------------------------------
+# Optional: run only specific phases (default: all)
+#   1 = infrastructure (JDBC, stores, JMS servers, migratable targets)
+#   2 = JMS modules
+#   3 = SAF agents + imported destinations
+#   4 = adapter deployments
+# ---------------------------------------------------------------------------
+#phases=1,2,3,4
+
+# ---------------------------------------------------------------------------
+# Target name remapping
+#
+# If the server/cluster names differ between the source and target domains,
+# add a mapping for each name that needs remapping.  Names not listed here
+# are used verbatim from the extract.
+#
+# Format:  target.<source_name>=<target_name>
+# ---------------------------------------------------------------------------
+#target.soa_server1=soa_server1
+#target.osb_server1=osb_server1
+#target.soa_cluster=soa_cluster
+#target.osb_cluster=osb_cluster
+#target.AdminServer=AdminServer
+
+# ---------------------------------------------------------------------------
+# JDBC passwords
+#
+# Passwords are never exported (passwordExported: false in the extract).
+# Add one entry per data source.
+#
+# Format:  password.<datasource_name>=<password>
+# ---------------------------------------------------------------------------
+#password.XrefDataSource=
+#password.FaultDataSource=
+#password.SIMSOMSIntegration_XA=
+#password.WAM2JMSLocalDataSource=
+#password.WAM_XXCUST_XA=
+#password.CommonAuditLog=
+
+# ---------------------------------------------------------------------------
+# Adapter path overrides
+#
+# The extract records the source and plan paths from the originating domain.
+# If those paths differ on the target host, override them here.
+#
+# Format:
+#   adapter.sourcepath.<AdapterName>=<path to .rar>
+#   adapter.planpath.<AdapterName>=<path to plan.xml>
+# ---------------------------------------------------------------------------
+#adapter.sourcepath.FtpAdapter=/u01/app/middleware/soa/soa/connectors/FtpAdapter.rar
+#adapter.planpath.FtpAdapter=/u01/app/middleware/soa/soa/EO_Plan.xml
+#adapter.sourcepath.DbAdapter=/u01/app/middleware/soa/soa/connectors/DbAdapter.rar
+#adapter.planpath.DbAdapter=/u01/app/middleware/soa/soa/XrefPlan.xml

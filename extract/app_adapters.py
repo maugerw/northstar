@@ -7,10 +7,11 @@ from jms_filters import get_targets, is_system_adapter, is_system_adapter_source
 from jms_serialize import safe, to_long
 
 def _sort_strings(items):
-    # Sort a list of plain strings (e.g. targets / jndiNames) in place.
+    # Return a sorted copy of a list of plain strings. Returns an empty list
+    # rather than None when items is empty/None so callers always get a list.
     if not items:
-        return
-    items.sort()
+        return []
+    return sorted(items)
 
 def extract_adapters(cmo, extract_data, system_data):
     print 'Extracting Adapters...'
@@ -89,8 +90,7 @@ def extract_connection_instances(plan_path):
 
     for item in instances.keys():
         print 'item: ', item
-    #return sorted(instances.keys())
-    return _sort_strings(instances.keys())
+    return _sort_strings(list(instances.keys()))
 
 def extract_adapter_runtime(domain_runtime, extract_data, system_data):
     # READ-ONLY runtime pass.
