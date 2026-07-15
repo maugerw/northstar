@@ -275,7 +275,8 @@
         {
           "name": "MNSAFConnectionFactory",
           "jndi": "jms/MNSAFConnectionFactory",
-          "subdeployment": "MNSAFConnectionFactory"
+          "defaultTargetingEnabled": false,
+          "subdeployment": null
         }
       ],
       "distributedTopics": [],
@@ -317,7 +318,8 @@
         {
           "name": "MNSOARemoteCF",
           "jndi": "jms/MNSOARemoteCF",
-          "subdeployment": "MNSOARemoteCF"
+          "defaultTargetingEnabled": false,
+          "subdeployment": null
         }
       ],
       "distributedTopics": [],
@@ -349,7 +351,8 @@
         {
           "name": "WAMJMSConnectionFactory",
           "jndi": "jms/WAM_JMS_CF",
-          "subdeployment": "WAMJMSConnectionFactory"
+          "defaultTargetingEnabled": false,
+          "subdeployment": null
         }
       ],
       "distributedTopics": [],
@@ -423,7 +426,11 @@
       "quotas": []
     }
   ],
-  "validationWarnings": [],
+  "validationWarnings": [
+    "ConnectionFactory \"MNSAFConnectionFactory\" in module \"MNSAFJMSModule\" references missing subdeployment \"MNSAFConnectionFactory\" and is not default-targeted - reference nulled (review targeting on source)",
+    "ConnectionFactory \"MNSOARemoteCF\" in module \"MNSOARemoteJMSModule\" references missing subdeployment \"MNSOARemoteCF\" and is not default-targeted - reference nulled (review targeting on source)",
+    "ConnectionFactory \"WAMJMSConnectionFactory\" in module \"WAMJMSModule\" references missing subdeployment \"WAMJMSConnectionFactory\" and is not default-targeted - reference nulled (review targeting on source)"
+  ],
   "safRemoteContexts": {},
   "safImportedDestinations": [],
   "infrastructure": {
