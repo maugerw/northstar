@@ -223,7 +223,7 @@ in order — later phases depend on objects created in earlier ones.
 | `GIS_SAF_SOA_Agent` | `Sending-only` | `GIS_SOA_FileStore` | 20000 | 180000 | 10 | `soa_server1` |
 | `MNSAFAgent` | `Sending-only` | `MNFileStore` | 20000 | 180000 | 10 | _(none)_ |
 
-All agents: Retry Multiplier = 1, Acknowledge Interval = -1 (default), Time To Live = 0 (unlimited), Logging = disabled.
+All agents: Retry Multiplier = 1, Acknowledge Interval = -1 (default), Time To Live = 0 (unlimited), **Logging = ENABLED**.
 
 ---
 
