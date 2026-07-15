@@ -7,7 +7,7 @@
       "retryDelayMaximum": 180000,
       "retryDelayMultiplier": 1,
       "acknowledgeInterval": -1,
-      "loggingEnabled": false,
+      "loggingEnabled": true,
       "targets": [],
       "windowSize": 10,
       "store": "GIS_OSB_FileStore",
@@ -20,7 +20,7 @@
       "retryDelayMaximum": 180000,
       "retryDelayMultiplier": 1,
       "acknowledgeInterval": -1,
-      "loggingEnabled": false,
+      "loggingEnabled": true,
       "targets": [
         "osb_server1"
       ],
@@ -35,7 +35,7 @@
       "retryDelayMaximum": 180000,
       "retryDelayMultiplier": 1,
       "acknowledgeInterval": -1,
-      "loggingEnabled": false,
+      "loggingEnabled": true,
       "targets": [
         "soa_server1"
       ],
@@ -50,7 +50,7 @@
       "retryDelayMaximum": 180000,
       "retryDelayMultiplier": 1,
       "acknowledgeInterval": -1,
-      "loggingEnabled": false,
+      "loggingEnabled": true,
       "targets": [],
       "windowSize": 10,
       "store": "MNFileStore",
@@ -273,10 +273,9 @@
       ],
       "connectionFactories": [
         {
-          "targets": [],
           "name": "MNSAFConnectionFactory",
           "jndi": "jms/MNSAFConnectionFactory",
-          "defaultTargetingEnabled": false,
+          "defaultTargetingEnabled": true,
           "subdeployment": null
         }
       ],
@@ -317,10 +316,9 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
-          "targets": [],
           "name": "MNSOARemoteCF",
           "jndi": "jms/MNSOARemoteCF",
-          "defaultTargetingEnabled": false,
+          "defaultTargetingEnabled": true,
           "subdeployment": null
         }
       ],
@@ -351,10 +349,9 @@
       "safErrorHandlings": [],
       "connectionFactories": [
         {
-          "targets": [],
           "name": "WAMJMSConnectionFactory",
           "jndi": "jms/WAM_JMS_CF",
-          "defaultTargetingEnabled": false,
+          "defaultTargetingEnabled": true,
           "subdeployment": null
         }
       ],
@@ -429,11 +426,7 @@
       "quotas": []
     }
   ],
-  "validationWarnings": [
-    "ConnectionFactory \"MNSAFConnectionFactory\" in module \"MNSAFJMSModule\" references missing subdeployment \"MNSAFConnectionFactory\" and is not default-targeted - reference nulled (review targeting on source)",
-    "ConnectionFactory \"MNSOARemoteCF\" in module \"MNSOARemoteJMSModule\" references missing subdeployment \"MNSOARemoteCF\" and is not default-targeted - reference nulled (review targeting on source)",
-    "ConnectionFactory \"WAMJMSConnectionFactory\" in module \"WAMJMSModule\" references missing subdeployment \"WAMJMSConnectionFactory\" and is not default-targeted - reference nulled (review targeting on source)"
-  ],
+  "validationWarnings": [],
   "safRemoteContexts": {},
   "safImportedDestinations": [],
   "infrastructure": {
