@@ -78,6 +78,12 @@ connect(config['admin.user'], config['admin.password'], config['admin.url'])
 
 try:
     domainConfig()
+    # Capture a fixed reference to the domain MBean while we are at the root.
+    # cd() below moves `cmo` around, so calling cmo.getJMSSystemResources()
+    # inside the loop would fail on the 2nd/3rd iteration (cmo would be a JMS
+    # resource node, not the domain). This fixed reference does not drift.
+    cd('/')
+    _domain = cmo
 
     for module_name, cf_name in PAIRS:
         print ''
@@ -87,7 +93,7 @@ try:
 
         # 1. What getSubDeployments() reports (what the extract uses).
         module_mbean = None
-        for m in cmo.getJMSSystemResources():
+        for m in _domain.getJMSSystemResources():
             if str(m.getName()) == module_name:
                 module_mbean = m
                 break
