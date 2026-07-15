@@ -106,7 +106,7 @@ try:
         try:
             cd('/JMSSystemResources/' + module_name + '/SubDeployments')
             ls()
-        except Exception:
+        except:
             print '   (could not cd/ls: ' + str(sys.exc_info()[1]) + ')'
 
         # 3. CF attributes.
@@ -117,17 +117,17 @@ try:
         try:
             cd(cf_path)
             print '   SubDeploymentName      = ' + str(cmo.getSubDeploymentName())
+            # Bare except: WLST cmo calls can raise a Java throwable that does
+            # not subclass Python Exception in Jython 2.2, so 'except Exception'
+            # does not catch it.
             try:
                 print '   DefaultTargetingEnabled= ' + str(cmo.isDefaultTargetingEnabled())
-            except Exception:
+            except:
                 print '   DefaultTargetingEnabled= <no accessor>'
-            # A ConnectionFactory MBean has no getTargets() accessor (targeting
-            # is via subdeployment or default targeting only), so guard it.
-            try:
-                print '   Targets                = ' + str(names_of(cmo.getTargets()))
-            except Exception:
-                print '   Targets                = <no getTargets() accessor on CF>'
-        except Exception:
+            # A ConnectionFactory MBean has no getTargets() accessor at all
+            # (targeting is via subdeployment or default targeting only), so we
+            # deliberately do not call it here - it would throw.
+        except:
             print '   (could not read CF at ' + cf_path + ': ' + str(sys.exc_info()[1]) + ')'
 
         # 4. Does a subdeployment named after the CF resolve directly?
@@ -137,7 +137,7 @@ try:
         try:
             cd(sub_path)
             print '   RESOLVES. Targets = ' + str(names_of(cmo.getTargets()))
-        except Exception:
+        except:
             print '   does NOT resolve: ' + str(sys.exc_info()[1])
 
 finally:
