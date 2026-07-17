@@ -1,0 +1,51 @@
+# load.properties — gmx / dev
+#
+# DO NOT COMMIT — this file is gitignored (contains passwords and URLs).
+# Copy load_objects.properties.template for a reference of all available keys.
+
+# ---------------------------------------------------------------------------
+# Admin server connection
+# ---------------------------------------------------------------------------
+admin.user=weblogic
+admin.password=
+admin.url=t3://localhost:7001
+
+# ---------------------------------------------------------------------------
+# Input extract
+# ---------------------------------------------------------------------------
+input.file=environments/gmx/dev/export.json
+
+# ---------------------------------------------------------------------------
+# Dry run — set to false only when ready to commit changes
+# ---------------------------------------------------------------------------
+dry.run=true
+
+# ---------------------------------------------------------------------------
+# Target name remapping
+#
+# Source targets from the extract are listed below.  If names differ on this
+# domain, change the right-hand side.  Names that match can be left or removed.
+# ---------------------------------------------------------------------------
+#target.AdminServer=AdminServer
+#target.soa_cluster=soa_cluster
+#target.soa_server1=soa_server1
+#target.soa_server1 (migratable)=soa_server1 (migratable)
+#target.osb_cluster=osb_cluster
+#target.osb_server1=osb_server1
+#target.osb_server1 (migratable)=osb_server1 (migratable)
+#target.GIS_OSB_JMS_Server=GIS_OSB_JMS_Server
+#target.GIS_SAF_SOA_Agent=GIS_SAF_SOA_Agent
+#target.GIS_SOA_JMS_Server=GIS_SOA_JMS_Server
+#target.MNSAFAgent=MNSAFAgent
+#target.MNSOARemoteJMSServer=MNSOARemoteJMSServer
+#target.WAMJMSServer=WAMJMSServer
+
+# ---------------------------------------------------------------------------
+# JDBC passwords (never in the extract — must be supplied manually)
+# ---------------------------------------------------------------------------
+password.CommonAuditLog=
+password.FaultDataSource=
+password.SIMSOMSIntegration_XA=
+password.WAM2JMSLocalDataSource=
+password.WAM_XXCUST_XA=
+password.XrefDataSource=
