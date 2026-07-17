@@ -10,3 +10,9 @@
 
 *.properties
 /plans
+
+# Environment-specific properties files (passwords/URLs — never track)
+environments/**/*.properties
+
+# Old extract output location (now under environments/)
+/extract/out/

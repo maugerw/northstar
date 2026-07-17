@@ -14,8 +14,10 @@ admin.url=t3://hostname:7001
 
 # ---------------------------------------------------------------------------
 # Required: path to the extract file produced by extract_objects.py
+# Recommended path follows the repo convention:
+#   input.file=environments/<domain>/<env>/export.json
 # ---------------------------------------------------------------------------
-input.file=/path/to/export.json
+input.file=environments/<domain>/<env>/export.json
 
 # ---------------------------------------------------------------------------
 # Optional: dry run (log what would be created without making changes)

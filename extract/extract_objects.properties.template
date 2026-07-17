@@ -17,6 +17,9 @@ admin.password=
 admin.url=
 
 # --- Domain / output locations ---
+# Recommended output paths follow the repo convention:
+#   output.file=environments/<domain>/<env>/export.json
+#   system.output.file=environments/<domain>/<env>/export_system.json
 domain.path=
 output.file=
 system.output.file=
