@@ -61,12 +61,45 @@ bugs on any machine.
 **Action:** `load/test/mock_wlst.py` (globals injector) + a runner that imports
 the phase modules and asserts/records the create/assign/set call sequence.
 
+### 4. Shadow deploy (live run with renamed objects)
+After a successful dry run, do a live run against the domain but with all
+object names suffixed (e.g. `MyQueue` → `MyQueue1`).  The renamed objects
+won't exist yet, so every existence check misses and the full
+create/assign/configure path executes for real — exercising the WLST code
+that dry-run never touches — without disturbing the production objects.
+The redundant `*1` objects can be deleted from the console afterward.
+
+The cleanest implementation is a **thin pre-processing script** (separate from
+the loader) that reads `export.json` and writes `export-shadow.json` with
+a configurable suffix applied to every `name` field.  No loader code changes
+required; the input file is what's renamed.  Feed `export-shadow.json` to the
+loader via `input.file` in the properties file.
+
+Things to be careful about:
+- Object **references** (e.g. a JMS server's `persistentStore` pointing to a
+  file store by name, or a destination's `subdeployment` field) must be
+  suffixed consistently — the transform must rename both the definition and
+  every reference to it, otherwise Phase 2+ will log "references missing X"
+  warnings.
+- `targets` (server/cluster names) should NOT be suffixed — those are real
+  domain objects you're assigning to, not objects being created.
+- JDBC passwords in the properties file still key off the data source name;
+  update the keys to match the suffixed names.
+
+**Action:** write `load/shadow_transform.py` — a plain CPython/Jython script
+that accepts `export.json` + a suffix string and writes `export-shadow.json`
+with all created-object names (and their intra-JSON references) renamed.
+Verify by diffing the two files before running the loader against it.
+
 ## Recommended order
 
 1 (except sweep) → 2 (dry run) gives the fastest real-world confidence, since a
 clean environment to load into isn't available. 3 (mock harness) is the
 portable safety net and is worth having regardless, but is lower priority than
 getting a dry run through against the actual domain.
+4 (shadow deploy) is the highest-confidence pre-production test available
+short of loading into a separate dev domain; worth doing before any real
+migration run.
 
 ## Also noted
 
