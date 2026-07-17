@@ -36,14 +36,14 @@ def _assign_targets(resource_type, resource_name, raw_targets, env):
         mapped = _map_target(t, env)
         try:
             assign(resource_type, resource_name, 'Target', mapped)
-        except Exception:
+        except:
             print '  WARNING: could not assign target "' + mapped + '" to ' + resource_type + ' "' + resource_name + '": ' + str(sys.exc_info()[1])
 
 
 def _exists(mbean_path):
     try:
         return getMBean(mbean_path) is not None
-    except Exception:
+    except:
         return False
 
 
@@ -105,7 +105,7 @@ def _load_jdbc_data_sources(data, env):
                 dsp.setJNDINames(jarray.array(jndi_names, java.lang.String))
             if global_tx:
                 dsp.setGlobalTransactionsProtocol(global_tx)
-        except Exception:
+        except:
             print '  WARNING: could not set data source params for ' + name + ': ' + str(sys.exc_info()[1])
 
         # Driver params (URL, driver class, password, properties)
@@ -126,7 +126,7 @@ def _load_jdbc_data_sources(data, env):
                         prop = props.createProperty(p_name)
                         if p_value:
                             prop.setValue(p_value)
-        except Exception:
+        except:
             print '  WARNING: could not set driver params for ' + name + ': ' + str(sys.exc_info()[1])
 
         # Connection pool params
@@ -142,7 +142,7 @@ def _load_jdbc_data_sources(data, env):
                 cp.setTestTableName(test_table)
             if test_on_reserve is not None:
                 cp.setTestConnectionsOnReserve(bool(test_on_reserve))
-        except Exception:
+        except:
             print '  WARNING: could not set pool params for ' + name + ': ' + str(sys.exc_info()[1])
 
         _assign_targets('JDBCSystemResource', name, raw_targets, env)
@@ -208,7 +208,7 @@ def _load_jdbc_store(st, env):
     if ds_name:
         try:
             ds_mbean = getMBean('/JDBCSystemResources/' + ds_name)
-        except Exception:
+        except:
             pass
         if ds_mbean is None:
             print '  WARNING: JDBCStore "' + name + '" references missing DataSource "' + ds_name + '" — skipping'
@@ -240,7 +240,7 @@ def _lookup_store(store_name):
             mb = getMBean(path + store_name)
             if mb is not None:
                 return mb
-        except Exception:
+        except:
             pass
     return None
 
@@ -325,7 +325,7 @@ def _load_migratable_targets(data, env):
             cluster_mbean = None
             try:
                 cluster_mbean = getMBean('/Clusters/' + _map_target(cluster_name, env))
-            except Exception:
+            except:
                 pass
             if cluster_mbean:
                 cmo.setCluster(cluster_mbean)
@@ -334,7 +334,7 @@ def _load_migratable_targets(data, env):
             srv_mbean = None
             try:
                 srv_mbean = getMBean('/Servers/' + _map_target(preferred_server, env))
-            except Exception:
+            except:
                 pass
             if srv_mbean:
                 cmo.setUserPreferredServer(srv_mbean)
@@ -377,11 +377,11 @@ def load_infrastructure(data, env):
             activate()
             print ''
             print 'Phase 1 activated OK'
-    except Exception:
+    except:
         print 'ERROR in Phase 1: ' + str(sys.exc_info()[1])
         if not dry_run:
             try:
                 cancelEdit('y')
-            except Exception:
+            except:
                 pass
         raise

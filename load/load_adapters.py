@@ -121,6 +121,6 @@ def load_adapters(data, env):
                        stageMode='nostage',
                        block='true')
             print '    Deployed OK: ' + name
-        except Exception:
+        except:
             print '    ERROR deploying ' + name + ': ' + str(sys.exc_info()[1])
             print '    (continuing with remaining adapters)'

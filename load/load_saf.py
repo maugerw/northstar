@@ -19,7 +19,7 @@ from load_serialize import get, get_str, get_list
 def _exists(mbean_path):
     try:
         return getMBean(mbean_path) is not None
-    except Exception:
+    except:
         return False
 
 
@@ -37,7 +37,7 @@ def _assign_targets(resource_type, resource_name, raw_targets, env):
         mapped = _map_target(t, env)
         try:
             assign(resource_type, resource_name, 'Target', mapped)
-        except Exception:
+        except:
             print '  WARNING: could not assign target "' + mapped + '" to ' + resource_type + ' "' + resource_name + '": ' + str(sys.exc_info()[1])
 
 
@@ -47,7 +47,7 @@ def _lookup_store(store_name):
             mb = getMBean(path + store_name)
             if mb is not None:
                 return mb
-        except Exception:
+        except:
             pass
     return None
 
@@ -206,7 +206,7 @@ def _load_saf_imported_destinations(data, env):
             rc_mbean = None
             try:
                 rc_mbean = getMBean('/SAFRemoteContexts/' + rc_name)
-            except Exception:
+            except:
                 pass
             if rc_mbean:
                 cmo.setSAFRemoteContext(rc_mbean)
@@ -242,11 +242,11 @@ def load_saf(data, env):
             activate()
             print ''
             print 'Phase 3 activated OK'
-    except Exception:
+    except:
         print 'ERROR in Phase 3: ' + str(sys.exc_info()[1])
         if not dry_run:
             try:
                 cancelEdit('y')
-            except Exception:
+            except:
                 pass
         raise

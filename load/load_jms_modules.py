@@ -19,7 +19,7 @@ from load_serialize import get, get_str, get_list
 def _exists(mbean_path):
     try:
         return getMBean(mbean_path) is not None
-    except Exception:
+    except:
         return False
 
 
@@ -37,7 +37,7 @@ def _assign_targets(resource_type, resource_name, raw_targets, env):
         mapped = _map_target(t, env)
         try:
             assign(resource_type, resource_name, 'Target', mapped)
-        except Exception:
+        except:
             print '  WARNING: could not assign target "' + mapped + '" to ' + resource_type + ' "' + resource_name + '": ' + str(sys.exc_info()[1])
 
 
@@ -80,7 +80,7 @@ def _load_subdeployments(module_name, subdeps, env):
             try:
                 assign('JMSSystemResource.' + module_name + '.SubDeployment',
                        sub_name, 'Target', mapped)
-            except Exception:
+            except:
                 print '    WARNING: could not assign target "' + mapped + '" to SubDeployment "' + sub_name + '": ' + str(sys.exc_info()[1])
 
 
@@ -238,7 +238,7 @@ def _load_connection_factories(module_name, cfs):
             # No subdeployment: CF inherits the module target directly.
             try:
                 cmo.setDefaultTargetingEnabled(True)
-            except Exception:
+            except:
                 print '    WARNING: could not enable default targeting for CF "' + name + '": ' + str(sys.exc_info()[1])
 
 
@@ -390,11 +390,11 @@ def load_jms_modules(data, env):
             activate()
             print ''
             print 'Phase 2 activated OK'
-    except Exception:
+    except:
         print 'ERROR in Phase 2: ' + str(sys.exc_info()[1])
         if not dry_run:
             try:
                 cancelEdit('y')
-            except Exception:
+            except:
                 pass
         raise
