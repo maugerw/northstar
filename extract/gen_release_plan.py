@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 gen_release_plan.py
 
@@ -29,6 +31,7 @@ per module, so a domain that uses topics or foreign servers gets a correct
 plan without script changes.
 """
 
+import io
 import json
 import os
 import re
@@ -86,7 +89,7 @@ SAF_SERVICE_TYPE_NOTE = {
 # ---------------------------------------------------------------------------
 
 def load_export(path):
-    with open(path, "r") as f:
+    with io.open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
@@ -152,6 +155,28 @@ def bool_yesno(v):
 
 def slug(name):
     return re.sub(r"[^A-Za-z0-9_.-]+", "_", name)
+
+
+def common_dir_path(paths):
+    """Python-2.7-compatible replacement for os.path.commonpath (added in
+    3.4). Returns the deepest directory common to all given directory
+    paths. Falls back to the first path's parent if there's no overlap
+    (mirrors commonpath's behaviour of raising only on truly incompatible
+    inputs, which doesn't apply here since these are all POSIX paths from
+    the same export)."""
+    if not paths:
+        return ""
+    if len(paths) == 1:
+        return paths[0]
+    split_paths = [p.split("/") for p in paths]
+    common = []
+    for parts in zip(*split_paths):
+        if all(part == parts[0] for part in parts):
+            common.append(parts[0])
+        else:
+            break
+    result = "/".join(common)
+    return result if result else paths[0]
 
 
 # ---------------------------------------------------------------------------
@@ -1049,7 +1074,7 @@ def render_detailed(data, domain, env):
           "application owner / vault).\n")
         all_dirs = [os.path.dirname(ad["sourcePath"]) for ad in adapters] + \
                    [os.path.dirname(ad["planPath"]) for ad in adapters]
-        common_root = os.path.commonpath(all_dirs) if len(all_dirs) > 1 else all_dirs[0]
+        common_root = common_dir_path(all_dirs)
         a("*(Source paths below use the source domain's Oracle home,\n"
           "`%s`\n(or a parent of it) — substitute your target Oracle\n"
           "home if the `.rar`/plan files are staged at a different path on "
@@ -1442,9 +1467,9 @@ def main():
     condensed = render_condensed(data, domain, env)
     detailed = render_detailed(data, domain, env)
 
-    with open(condensed_path, "w") as f:
+    with io.open(condensed_path, "w", encoding="utf-8") as f:
         f.write(condensed)
-    with open(detailed_path, "w") as f:
+    with io.open(detailed_path, "w", encoding="utf-8") as f:
         f.write(detailed)
 
     print("Wrote %s (%d bytes)" % (condensed_path, len(condensed)))
