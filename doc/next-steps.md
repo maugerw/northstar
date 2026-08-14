@@ -10,10 +10,21 @@ _Status note as of 2026-07-15. Update as items are done._
   `diag_cf_targeting.py`), `validate_references` now also checks connection
   factory subdeployment references. Latest export in `extract/out/` is clean
   (`validationWarnings: []`).
-- **Release plan** (`extract/out/release-plan.md`): fleshed out into an
-  executable, step-by-step console release document (procedures + data tables,
-  dependency-ordered phases, verification + rollback). Backup path if the
-  loader isn't used.
+- **Release plan** (`environments/<domain>/<env>/release-plan.md` +
+  `release-plan-detailed.md`): now **generated**, not hand-written, by
+  `extract/gen_release_plan.py export.json` (added 2026-08-14). Takes any
+  environment's `export.json` and emits both the condensed procedure-plus-
+  tables document and the fully-spelled-out one-checkbox-per-step version
+  (the detailed one is aimed at someone unfamiliar with this migration).
+  Covers the full extract schema (queues, distributed queues, topics,
+  templates, quotas, destination keys, foreign servers, connection
+  factories, SAF error handlings), not just what gmx/dev happens to use.
+  Backup path if the loader isn't used. Re-run after every fresh export —
+  do not hand-edit the generated `.md` files (edit the export or the
+  generator instead). Caught a real transcription bug in the original
+  hand-written gmx/dev plan on first use: `FaultDataSource`'s Test
+  Connections On Reserve was hand-transcribed as Yes, export.json says
+  `false`.
 - **Loader** (`load/`): skeleton complete and dry-run ready. Phased
   (infra → JMS modules → SAF → adapters), idempotent (existence checks before
   create), per-phase edit/activate sessions, env-mapping properties
