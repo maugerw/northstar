@@ -463,6 +463,16 @@ func renderCondensed(e *Export, domain, env string) string {
 	}
 	a("| Target names | Substitute if target domain uses different " +
 		"server/cluster names |")
+	a("")
+	a("---\n")
+
+	a("## 14. Extractor Warnings & Uncovered Objects\n")
+	a("Fields the *extractor* captures but this plan cannot fully turn " +
+		"into a click-through\nprocedure on its own -- read this section " +
+		"even when Sections 1-13 look complete.\n")
+	for _, line := range renderExtractorWarningsBody(e) {
+		a(line)
+	}
 
 	return b.String()
 }

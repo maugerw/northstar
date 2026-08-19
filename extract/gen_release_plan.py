@@ -257,6 +257,76 @@ def untargeted_saf_agents(data):
     return [s["name"] for s in data.get("safAgents", []) if not s.get("targets")]
 
 
+def _render_extractor_warnings_body(data):
+    """Body content shared by both documents' final section: referential-
+    integrity warnings the extractor itself found (and safely nulled)
+    during export, plus any SAF Imported Destinations captured -- a real
+    WebLogic object type this generator does not yet have a validated
+    click-through procedure for (no export has populated it before, so no
+    procedure has been checked against a live console). Always rendered,
+    even when empty, so a warning can never go silently missing on some
+    future messier domain -- the reader always sees that this was checked.
+    """
+    out = []
+    a = out.append
+
+    warnings = data.get("validationWarnings") or []
+    if warnings:
+        a("⚠️ The extractor found %d referential-integrity issue(s) in the "
+          "source domain's config and nulled the dangling reference before "
+          "export (a safe default -- nothing broken is silently wired into "
+          "this plan). Review each one and confirm on the source what it "
+          "*should* reference before assuming this plan is complete:\n"
+          % len(warnings))
+        for w in warnings:
+            a("- %s" % w)
+        a("")
+    else:
+        a("No referential-integrity warnings were reported by the extractor "
+          "for this export -- every destination/template/error-handling "
+          "reference captured here resolved to a real object on the source "
+          "domain.\n")
+
+    imported = data.get("safImportedDestinations") or []
+    remote_contexts = data.get("safRemoteContexts") or {}
+    if imported:
+        a("⚠️ This export also captured %d SAF Imported Destination(s) -- a "
+          "real WebLogic object (Services → Messaging → Store-and-Forward "
+          "Agents → Imported Destinations) that this generator does not "
+          "yet have a validated click-through procedure for (no export has "
+          "populated this field before now, so no procedure has been "
+          "checked against a live console). Configure these manually on the "
+          "target using the data below, and treat this as a **known gap** "
+          "in the generator, not a completed phase:\n" % len(imported))
+        a("| Name | Local JNDI | Remote JNDI | Remote Context | Targets |")
+        a("|---|---|---|---|---|")
+        for d in imported:
+            a("| `%s` | `%s` | `%s` | `%s` | %s |" % (
+                d["name"], d.get("localJNDIName"), d.get("remoteJNDIName"),
+                d.get("remoteContext"),
+                ", ".join(d.get("targets", [])) or "*(none)*"))
+        a("")
+        cited = sorted(set(d.get("remoteContext") for d in imported if d.get("remoteContext")))
+        if cited:
+            a("**Remote Context connection details referenced above:**\n")
+            for name in cited:
+                rc = remote_contexts.get(name)
+                if rc:
+                    a("- `%s`: Initial Context Factory `%s`, Connection URL "
+                      "`%s`, Provider URL `%s`"
+                      % (name, rc.get("initialContextFactory"),
+                         rc.get("connectionURL"), rc.get("providerURL")))
+                else:
+                    a("- `%s`: ⚠️ referenced by an imported destination "
+                      "above but no matching entry in the export's "
+                      "safRemoteContexts -- confirm this remote context "
+                      "still exists on the source domain." % name)
+    else:
+        a("No SAF Imported Destinations were captured in this export.\n")
+
+    return out
+
+
 def module_child_counts(mod):
     keys = ["queues", "uniformDistributedQueues", "distributedQueues",
             "topics", "uniformDistributedTopics", "distributedTopics",
@@ -652,6 +722,14 @@ def render_condensed(data, domain, env):
           "intended |" % ", ".join("`%s`" % u for u in untargeted))
     a("| Target names | Substitute if target domain uses different "
       "server/cluster names |")
+    a("")
+    a("---\n")
+
+    a("## 14. Extractor Warnings & Uncovered Objects\n")
+    a("Fields the *extractor* captures but this plan cannot fully turn "
+      "into a click-through\nprocedure on its own -- read this section "
+      "even when Sections 1-13 look complete.\n")
+    out.extend(_render_extractor_warnings_body(data))
 
     return "\n".join(out) + "\n"
 
@@ -1182,6 +1260,22 @@ def render_detailed(data, domain, env):
       "-- everything else (object names) must be created exactly as "
       "written. |"
       % (gnum, ", ".join("`%s`" % t for t in target_names)))
+    a("")
+    a("---\n")
+
+    a("# %d. Extractor Warnings & Uncovered Objects\n" % (section_num + 3))
+    a("Read this section even when every Phase above is ticked off. It "
+      "covers two kinds of\nthing the extractor captured that the Phases "
+      "above cannot fully turn into a\nclick-through procedure on their "
+      "own:\n")
+    a("1. **Referential-integrity warnings** -- the extractor found a "
+      "reference (an error\n   destination, a subdeployment) that didn't "
+      "resolve to a real object on the source\n   domain, and safely "
+      "nulled it rather than exporting something broken. ")
+    a("2. **SAF Imported Destinations** -- a real WebLogic object type "
+      "this generator does\n   not yet have a validated click-through "
+      "procedure for.\n")
+    out.extend(_render_extractor_warnings_body(data))
 
     return "\n".join(out) + "\n"
 

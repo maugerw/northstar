@@ -9,10 +9,36 @@ package main
 // plain strings.
 
 type Export struct {
-	SafAgents          []SafAgent          `json:"safAgents"`
-	AdapterDeployments []AdapterDeployment `json:"adapterDeployments"`
-	JmsModules         []JmsModule         `json:"jmsModules"`
-	Infrastructure     Infrastructure      `json:"infrastructure"`
+	SafAgents               []SafAgent                  `json:"safAgents"`
+	AdapterDeployments      []AdapterDeployment         `json:"adapterDeployments"`
+	JmsModules              []JmsModule                 `json:"jmsModules"`
+	Infrastructure          Infrastructure              `json:"infrastructure"`
+	ValidationWarnings      []string                    `json:"validationWarnings"`
+	SafImportedDestinations []SafImportedDestination    `json:"safImportedDestinations"`
+	SafRemoteContexts       map[string]SafRemoteContext `json:"safRemoteContexts"`
+}
+
+// SafImportedDestination and SafRemoteContext mirror the extractor's own
+// jms_saf.py output. Neither the original gen_release_plan.py nor this
+// port had a rendered procedure for these until the 2026-08-19 Extractor
+// Warnings section -- see render_condensed.go/render_detailed.go's
+// renderExtractorWarningsBody.
+type SafImportedDestination struct {
+	Name           string   `json:"name"`
+	Targets        []string `json:"targets"`
+	RemoteJNDIName string   `json:"remoteJNDIName"`
+	LocalJNDIName  string   `json:"localJNDIName"`
+	RemoteContext  string   `json:"remoteContext"`
+	Qos            string   `json:"qos"`
+	TimeToLive     *int64   `json:"timeToLive"`
+	LoggingEnabled bool     `json:"loggingEnabled"`
+}
+
+type SafRemoteContext struct {
+	Name                  string `json:"name"`
+	ProviderURL           string `json:"providerURL"`
+	InitialContextFactory string `json:"initialContextFactory"`
+	ConnectionURL         string `json:"connectionURL"`
 }
 
 type Infrastructure struct {

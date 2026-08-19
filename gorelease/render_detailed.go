@@ -479,6 +479,24 @@ func renderDetailed(e *Export, domain, env string) string {
 		"differ, substitute your names everywhere those appear in this plan "+
 		"-- everything else (object names) must be created exactly as "+
 		"written. |", gnum, joinBacktickNames(targetNames))
+	a("")
+	a("---\n")
+
+	af("# %d. Extractor Warnings & Uncovered Objects\n", sectionNum+3)
+	a("Read this section even when every Phase above is ticked off. It " +
+		"covers two kinds of\nthing the extractor captured that the Phases " +
+		"above cannot fully turn into a\nclick-through procedure on their " +
+		"own:\n")
+	a("1. **Referential-integrity warnings** -- the extractor found a " +
+		"reference (an error\n   destination, a subdeployment) that didn't " +
+		"resolve to a real object on the source\n   domain, and safely " +
+		"nulled it rather than exporting something broken. ")
+	a("2. **SAF Imported Destinations** -- a real WebLogic object type " +
+		"this generator does\n   not yet have a validated click-through " +
+		"procedure for.\n")
+	for _, line := range renderExtractorWarningsBody(e) {
+		a(line)
+	}
 
 	return b.String()
 }
