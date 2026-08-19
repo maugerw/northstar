@@ -1,0 +1,54 @@
+===============================================================
+= JOB       : CLSUA018#PHSKP_W02[(1450 11/17/24),(0AAAAAAAAAAEY6UM)].IL_GMX_ERROR_REPORTS
+= USER      : oracle            Oracle_DBA
+= JCLFILE   : /orainst/spdilprd/spdil_gmx/bin/gmx_failed_transactions_extraction.sh
+= Job Number: 45023576
+= Mon 11/18/24 06:00:06 GMT
+===============================================================
+SSE Amended jobmanrc v1.5 - last amended 22/10/2014
+TWS for UNIX/JOBMANRC 8.5
+Licensed Materials - Property of IBM*
+5698-WSH
+(C) Copyright IBM Corp. 1998, 2014 All rights reserved.
+* Trademark of International Business Machines
+AWSBIS307I Starting /usr/ssvtws/TWS/jobmanrc /orainst/spdilprd/spdil_gmx/bin/gmx_failed_transactions_extraction.sh
+
+Tivoli Workload Scheduler (UNIX)/JOBINFO 9.2.0.00 (20140212)
+Installed for user "ssvtws".
+Locale LANG set to the following: "en"
+Running system environment - Start
+Running system environment - End
+Running system profile - Start
+Cannot find terminal.
+Running system profile - End
+Running users profile - Start
+[YOU HAVE NEW MAIL]
+stty: tcgetattr: A specified file does not support the ioctl system call.
+Running users profile - End
+Running job file (No-Shell Not-Command)
+Script gmx_failed_transactions_extraction.sh started...
+Started at 06:00
+
+: Environment     GMX SPDILPRD
+: User Name       [oracle]
+: Oracle_sid      [spdilprd1]
+: 
+oracle
+/products/oracle
+
+gmx_chime_to_maximo_failures
+Calling SQLPLUS and running the script gmx_chime_to_maximo_failures.sql
+gmx_maximo_to_chime_failures
+Calling SQLPLUS and running the script gmx_maximo_to_cbrm_failures.sql
+Checking status after SQLPLUS calls...
+SQLPLUS ran successfully but checking whether gmx_chime_to_maximo_failures.csv file has been produced
+gmx_chime_to_maximo_failures.csv has been produced... 
+
+Changing file permissions and moving  file to File mover directory...
+Finished running the shell script gmx_failed_transactions_extraction.sh ...
+===============================================================
+= Exit Status           : 0
+= System Time (Seconds) : 0     Elapsed Time (Minutes) : 0
+= User Time (Seconds)   : 0
+= Mon 11/18/24 06:00:27 GMT
+===============================================================

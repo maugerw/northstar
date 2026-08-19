@@ -1,0 +1,31 @@
+
+Workstation       Job Definition Name                       Updated On  Locked By
+----------------  ----------------------------------------  ----------  ----------------
+CLSUA018          SSEN_IL_EH_TABLES_TRIM                    06/17/2025  -
+
+CLSUA018#SSEN_IL_EH_TABLES_TRIM
+SCRIPTNAME "/orainst/spdilprd/spdil_housekeeping/bin/trim_eh_tables.ksh #SSERUNTIME=20"
+STREAMLOGON oracle
+DESCRIPTION "PHSKP_D01:ADPSCORP:P:N"
+TASKTYPE UNIX
+RECOVERY STOP
+
+=================================================================================================
+
+Workstation       Job Stream Name   Valid From  Updated On  Locked By
+----------------  ----------------  ----------  ----------  ----------------
+CLSUA018          PHSKP_D01         -           06/17/2025  -
+
+
+SCHEDULE CLSUA018#PHSKP_D01
+DESCRIPTION "Added by composer."
+ON RUNCYCLE RULE1 "FREQ=DAILY;"
+AT 1450
+:
+
+#CHG5836355
+
+CLSUA018#SSEN_IL_EH_TABLES_TRIM
+AT 0500
+
+END

@@ -1,0 +1,30 @@
+
+Workstation       Job Definition Name                       Updated On  Locked By
+----------------  ----------------------------------------  ----------  ----------------
+HAVUT151          SSEN_IL_EH_TABLES_TRIM                    04/04/2025  -
+
+HAVUT151#SSEN_IL_EH_TABLES_TRIM
+SCRIPTNAME "/orainst/spdiluat/spdil_housekeeping/bin/trim_eh_tables.ksh #SSERUNTIME=20"
+STREAMLOGON oracle
+DESCRIPTION "DHSKP_D01:ADPSCORP:D:N"
+TASKTYPE UNIX
+RECOVERY STOP
+
+Workstation       Job Stream Name   Valid From  Updated On  Locked By
+----------------  ----------------  ----------  ----------  ----------------
+HAVUT151          DHSKP_D01         -           04/04/2025  -
+
+#REQ0945224,REQ1254615
+
+SCHEDULE HAVUT151#DHSKP_D01
+DESCRIPTION "Added by composer."
+ON RUNCYCLE RULE1 "FREQ=DAILY;"
+AT 1450
+:
+
+#REQ1879151
+
+HAVUT151#SSEN_IL_EH_TABLES_TRIM
+AT 0500
+
+END

@@ -1,0 +1,23 @@
+
+-dis jd PORUT053#SSEN_IL_EH_TABLES_TRIM
+
+Workstation Job Definition Name Updated On Locked By
+---------------- ---------------------------------------- ---------- ----------------
+PORUT053 SSEN_IL_EH_TABLES_TRIM 04/01/2025 -
+
+PORUT053#SSEN_IL_EH_TABLES_TRIM
+SCRIPTNAME "/orainst/spdilsit/spdil_housekeeping/bin/trim_eh_tables.ksh # SSERUNTIME=15"
+STREAMLOGON oracle
+DESCRIPTION "DHSKP_D01:ADPSCORP:P:N"
+TASKTYPE UNIX
+RECOVERY STOP
+
+
+
+SCHEDULE PORUT053#DHSKP_D01
+DESCRIPTION "Added by composer."
+ON RUNCYCLE RULE1 "FREQ=DAILY;INTERVAL=1"
+AT 1450
+:
+PORUT053#SSEN_IL_EH_TABLES_TRIM
+AT 0500

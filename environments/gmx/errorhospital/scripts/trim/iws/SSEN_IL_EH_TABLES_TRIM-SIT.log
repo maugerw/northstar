@@ -1,0 +1,62 @@
+===============================================================
+= JOB       : PORUT053#DHSKP_D01[(1450 04/02/25),(0AAAAAAAAAALEXWA)].SSEN_IL_EH_TABLES_TRIM
+= USER      : oracle            Oracle DBA
+= JCLFILE   : /orainst/spdilsit/spdil_housekeeping/bin/trim_eh_tables.ksh # SSERUNTIME=15
+= Job Number: 50397448
+= Thu 04/03/25 05:00:03 BST
+===============================================================
+SSE Amended jobmanrc v1.5 - last amended 22/10/2014
+TWS for UNIX/JOBMANRC 8.5
+Licensed Materials - Property of IBM* and HCL**
+5698-WSH
+(C) Copyright IBM Corp. 1998, 2016 All rights reserved.
+(C) Copyright HCL Technologies Ltd. 2016, 2017 All rights reserved.
+* Trademark of International Business Machines
+** Trademark of HCL Technologies Limited
+AWSBIS307I Starting /usr/tws/TWS/jobmanrc /orainst/spdilsit/spdil_housekeeping/bin/trim_eh_tables.ksh
+
+IBM Workload Scheduler(UNIX)/JOBINFO 9.4.0.01 (20170626)
+Installed for user "tws".
+Locale LANG set to the following: "en"
+/orainst/spdilsit/spdil_housekeeping/bin/trim_eh_tables.ksh # SSERUNTIME=15
+Setting warning for job SSEN_IL_EH_TABLES_TRIM running too long, to 15 minutes
+Running system environment - Start
+Running system environment - End
+Running system profile - Start
+Cannot find terminal.
+Running system profile - End
+Running users profile - Start
+stty: tcgetattr: A specified file does not support the ioctl system call.
+Running users profile - End
+Running job file (No-Shell Is-Command)
+
+Running trim_eh_tables.ksh at 20250403_050003
+
+ORACLE_SID = dbmrsit1
+
+Calling sqlplus with trim_eh_tables.sql
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Thu Apr 3 05:00:03 2025
+Version 19.23.0.0.0
+
+Copyright (c) 1982, 2023, Oracle.  All rights reserved.
+
+Last Successful login time: Thu Apr 03 2025 04:30:13 +01:00
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.23.0.0.0
+
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.23.0.0.0
+
+Exiting trim_eh_tables.ksh at 20250403_050011
+
+return value is 0
+AWSBIS308I End of job
+===============================================================
+= Exit Status           : 0
+= System Time (Seconds) : 0     Elapsed Time (hh:mm:ss) : 0:00:08
+= User Time (Seconds)   : 0
+= Thu 04/03/25 05:00:11 BST
+===============================================================

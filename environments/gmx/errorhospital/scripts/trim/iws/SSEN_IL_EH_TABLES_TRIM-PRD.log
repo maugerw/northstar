@@ -1,0 +1,61 @@
+===============================================================
+= JOB       : CLSUA018#PHSKP_D01[(1450 06/17/25),(0AAAAAAAAAAE5DV3)].SSEN_IL_EH_TABLES_TRIM
+= USER      : oracle            Oracle_DBA
+= JCLFILE   : /orainst/spdilprd/spdil_housekeeping/bin/trim_eh_tables.ksh #SSERUNTIME=20
+= Job Number: 36897138
+= Wed 06/18/25 05:00:17 BST
+===============================================================
+SSE Amended jobmanrc v1.5 - last amended 22/10/2014
+TWS for UNIX/JOBMANRC 8.5
+Licensed Materials - Property of IBM*
+5698-WSH
+(C) Copyright IBM Corp. 1998, 2014 All rights reserved.
+* Trademark of International Business Machines
+AWSBIS307I Starting /usr/ssvtws/TWS/jobmanrc /orainst/spdilprd/spdil_housekeeping/bin/trim_eh_tables.ksh
+
+Tivoli Workload Scheduler (UNIX)/JOBINFO 9.2.0.00 (20140212)
+Installed for user "ssvtws".
+Locale LANG set to the following: "en"
+/orainst/spdilprd/spdil_housekeeping/bin/trim_eh_tables.ksh #SSERUNTIME=20
+Setting warning for job SSEN_IL_EH_TABLES_TRIM running too long, to 20 minutes
+Running system environment - Start
+Running system environment - End
+Running system profile - Start
+Cannot find terminal.
+Running system profile - End
+Running users profile - Start
+[YOU HAVE NEW MAIL]
+stty: tcgetattr: A specified file does not support the ioctl system call.
+Running users profile - End
+Running job file (No-Shell Is-Command)
+
+Running trim_eh_tables.ksh at 20250618_050026
+
+ORACLE_SID = spdilprd2
+
+Calling sqlplus with trim_eh_tables.sql
+
+SQL*Plus: Release 19.0.0.0.0 - Production on Wed Jun 18 05:00:27 2025
+Version 19.14.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Last Successful login time: Tue Jun 17 2025 16:00:46 +01:00
+
+Connected to:
+Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.14.0.0.0
+
+Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+Version 19.14.0.0.0
+
+Exiting trim_eh_tables.ksh at 20250618_050630
+
+return value is 0
+AWSBIS308I End of job
+===============================================================
+= Exit Status           : 0
+= System Time (Seconds) : 0     Elapsed Time (Minutes) : 6
+= User Time (Seconds)   : 0
+= Wed 06/18/25 05:06:30 BST
+===============================================================

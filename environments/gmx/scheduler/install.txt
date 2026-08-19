@@ -1,0 +1,32 @@
+
+copy scheduler.properties to $DOMAIN_HOME/AppProperties/
+
+copy SOAScheduler.war to $DOMAIN_HOME/servers/AdminServer/upload/
+
+
+Login to admin console
+
+Click on Lock and Edit
+
+Navigate to Deployments under Domain Structure
+
+Click on Install
+
+Select 'Upload your file' link
+
+Click on 'Choose file' and select 'servers/AdminServer/upload/SOAScheduler.war' war file
+
+Select default 'Install this deployment as an application'
+
+Select target servers 'AdminServer'
+
+Select default for optional settings
+
+Click Next on summary page
+
+Click Finish on install page
+
+Activate Changes
+
+On SOAScheduler summary page click on 'Control' tab and then 'Start/Stop'
+Click on 'Start Servicing all Requests'
