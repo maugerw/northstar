@@ -21,6 +21,33 @@ func renderExtractorWarningsBody(e *Export) []string {
 	a := func(s string) { out = append(out, s) }
 	af := func(format string, args ...interface{}) { out = append(out, fmt.Sprintf(format, args...)) }
 
+	dupes := duplicateJNDIDataSources(e)
+	if len(dupes) > 0 {
+		af("⚠️ **%d JNDI name(s) are claimed by more than one data source "+
+			"in this export.** This is a real state of the source domain — "+
+			"two distinct data sources (often pointing at different "+
+			"hosts/databases) exporting the same JNDI string — not an "+
+			"extraction error. Creating both on the target as written WILL "+
+			"COLLIDE: whichever is created second either fails on a "+
+			"duplicate JNDI or silently rebinds the JNDI away from the "+
+			"first one. Anything that looks up this JNDI (an adapter "+
+			"connection instance, a composite) is also ambiguous until this "+
+			"is resolved on the source — confirm with the app owner which "+
+			"data source is the real one before running Phase 1 for either, "+
+			"or whether one is simply a leftover that should not be "+
+			"migrated at all:\n", len(dupes))
+		a("| JNDI Name | Claimed by |")
+		a("|---|---|")
+		for _, d := range dupes {
+			af("| `%s` | %s |", d.JNDI, joinBacktickNames(d.Names))
+		}
+		a("")
+	} else {
+		a("No JNDI name collisions were found across the data sources in " +
+			"this export — every JNDI name is claimed by exactly one data " +
+			"source.\n")
+	}
+
 	warnings := e.ValidationWarnings
 	if len(warnings) > 0 {
 		af("⚠️ The extractor found %d referential-integrity issue(s) in the "+

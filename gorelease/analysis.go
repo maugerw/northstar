@@ -134,6 +134,41 @@ func untargetedSafAgents(e *Export) []string {
 	return out
 }
 
+type jndiDuplicate struct {
+	JNDI  string
+	Names []string
+}
+
+// duplicateJNDIDataSources returns data sources that export the SAME JNDI
+// name as another data source in this export. This is a genuine
+// source-domain config state (two distinct data source MBeans, e.g.
+// pointing at different hosts/databases, sharing one JNDI string), not an
+// extractor bug -- but the plan must not create both on the target
+// silently, since whichever is created second either fails on a duplicate
+// JNDI or rebinds the JNDI away from the first one. Sorted by JNDI name
+// for stable output (mirrors duplicate_jndi_data_sources() in
+// gen_release_plan.py).
+func duplicateJNDIDataSources(e *Export) []jndiDuplicate {
+	jndiToNames := map[string][]string{}
+	var order []string
+	for _, ds := range e.Infrastructure.JdbcDataSources {
+		for _, j := range ds.JndiNames {
+			if _, seen := jndiToNames[j]; !seen {
+				order = append(order, j)
+			}
+			jndiToNames[j] = append(jndiToNames[j], ds.Name)
+		}
+	}
+	var dupes []jndiDuplicate
+	for _, j := range order {
+		if names := jndiToNames[j]; len(names) > 1 {
+			dupes = append(dupes, jndiDuplicate{JNDI: j, Names: names})
+		}
+	}
+	sort.Slice(dupes, func(i, k int) bool { return dupes[i].JNDI < dupes[k].JNDI })
+	return dupes
+}
+
 func fileStores(e *Export) []PersistentStore {
 	var out []PersistentStore
 	for _, s := range e.Infrastructure.PersistentStores {

@@ -257,6 +257,26 @@ def untargeted_saf_agents(data):
     return [s["name"] for s in data.get("safAgents", []) if not s.get("targets")]
 
 
+def duplicate_jndi_data_sources(data):
+    """Data sources that export the SAME JNDI name as another data source
+    in this export. This is a genuine source-domain config state (two
+    distinct data source MBeans, e.g. pointing at different
+    hosts/databases, sharing one JNDI string), not an extractor bug --
+    but the plan must not create both on the target silently, since
+    whichever is created second either fails on a duplicate JNDI or
+    rebinds the JNDI away from the first one. Returns a list of
+    (jndi_name, [ds_name, ds_name, ...]) for every JNDI claimed by more
+    than one data source, sorted by JNDI name for stable output.
+    """
+    jndi_to_names = {}
+    for ds in data.get("infrastructure", {}).get("jdbcDataSources", []):
+        for j in ds.get("jndiNames", []):
+            jndi_to_names.setdefault(j, []).append(ds["name"])
+    dupes = [(j, names) for j, names in jndi_to_names.items() if len(names) > 1]
+    dupes.sort(key=lambda pair: pair[0])
+    return dupes
+
+
 def _render_extractor_warnings_body(data):
     """Body content shared by both documents' final section: referential-
     integrity warnings the extractor itself found (and safely nulled)
@@ -269,6 +289,31 @@ def _render_extractor_warnings_body(data):
     """
     out = []
     a = out.append
+
+    dupes = duplicate_jndi_data_sources(data)
+    if dupes:
+        a("⚠️ **%d JNDI name(s) are claimed by more than one data source "
+          "in this export.** This is a real state of the source domain — "
+          "two distinct data sources (often pointing at different "
+          "hosts/databases) exporting the same JNDI string — not an "
+          "extraction error. Creating both on the target as written WILL "
+          "COLLIDE: whichever is created second either fails on a "
+          "duplicate JNDI or silently rebinds the JNDI away from the "
+          "first one. Anything that looks up this JNDI (an adapter "
+          "connection instance, a composite) is also ambiguous until this "
+          "is resolved on the source — confirm with the app owner which "
+          "data source is the real one before running Phase 1 for either, "
+          "or whether one is simply a leftover that should not be "
+          "migrated at all:\n" % len(dupes))
+        a("| JNDI Name | Claimed by |")
+        a("|---|---|")
+        for jndi, names in dupes:
+            a("| `%s` | %s |" % (jndi, ", ".join("`%s`" % n for n in names)))
+        a("")
+    else:
+        a("No JNDI name collisions were found across the data sources in "
+          "this export — every JNDI name is claimed by exactly one data "
+          "source.\n")
 
     warnings = data.get("validationWarnings") or []
     if warnings:
