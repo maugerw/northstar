@@ -77,8 +77,22 @@ func main() {
 
 func inferDomainEnv(exportPath string) (domain, env string) {
 	domain, env = "<domain>", "<env>"
+	// Normalize to forward slashes and split directly -- do NOT route this
+	// through filepath.Clean: on a Windows build, Clean converts every "/"
+	// to the OS Separator ("\\"), which then makes a subsequent Split(...,
+	// "/") find nothing to split on at all (invisible on Linux/macOS builds
+	// where Separator is already "/" -- this is exactly the bug that showed
+	// up on the AVD: <domain>/<env> placeholders instead of the real path
+	// segments). A plain split on "/", skipping empty segments (from a
+	// leading drive-letter root, a double slash, etc.), is all that's
+	// needed here.
 	normalized := strings.ReplaceAll(exportPath, "\\", "/")
-	parts := strings.Split(filepath.Clean(normalized), "/")
+	var parts []string
+	for _, seg := range strings.Split(normalized, "/") {
+		if seg != "" {
+			parts = append(parts, seg)
+		}
+	}
 	for i, p := range parts {
 		if p == "environments" && i+2 < len(parts) {
 			domain, env = parts[i+1], parts[i+2]
