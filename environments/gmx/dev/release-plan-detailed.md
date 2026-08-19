@@ -965,3 +965,22 @@ phase's own checklist already covered part of it.
 | 4 | Adapter source/plan paths | Substitute your target Oracle home for the source paths throughout Phase 6. |
 | 5 | Untargeted SAF agents | `GIS_PublishChangeSet_SAF`, `MNSAFAgent` — confirm with the app owner this is intentional, not an oversight, before matching it here. |
 | 6 | Target infrastructure names | If your target domain's `AdminServer`, `osb_cluster`, `osb_server1`, `soa_cluster`, `soa_server1` differ, substitute your names everywhere those appear in this plan -- everything else (object names) must be created exactly as written. |
+
+---
+
+# 11. Extractor Warnings & Uncovered Objects
+
+Read this section even when every Phase above is ticked off. It covers two kinds of
+thing the extractor captured that the Phases above cannot fully turn into a
+click-through procedure on their own:
+
+1. **Referential-integrity warnings** -- the extractor found a reference (an error
+   destination, a subdeployment) that didn't resolve to a real object on the source
+   domain, and safely nulled it rather than exporting something broken. 
+2. **SAF Imported Destinations** -- a real WebLogic object type this generator does
+   not yet have a validated click-through procedure for.
+
+No referential-integrity warnings were reported by the extractor for this export -- every destination/template/error-handling reference captured here resolved to a real object on the source domain.
+
+No SAF Imported Destinations were captured in this export.
+

@@ -1,0 +1,350 @@
+{
+  "safAgents": [],
+  "adapterDeployments": [
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "DbAdapter",
+      "planPath": "/crmdevf/products/middleware/soa/soa/DBAdapterPlan.xml",
+      "sourcePath": "/crmdevf/products/middleware/soa/soa/connectors/DbAdapter.rar",
+      "connectionInstances": [
+        "eis/DB/CRM_XXCUST_XA",
+        "eis/DB/PROMISIntegration_XA",
+        "eis/DB/SIMSIntegration_XA",
+        "eis/DB/SIMSOMSIntegration_XA"
+      ]
+    },
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "JmsAdapter",
+      "planPath": "/crmdevf/products/middleware/soa/soa/Plan.xml",
+      "sourcePath": "/crmdevf/products/middleware/soa/soa/connectors/JmsAdapter.rar",
+      "connectionInstances": [
+        "eis/HAFileAdapter"
+      ]
+    }
+  ],
+  "jmsModules": [
+    {
+      "topics": [],
+      "name": "OMSJMSModule",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "OMSJMSConnectionFactory",
+          "jndi": "jms/OMS_JMS_CF",
+          "defaultTargetingEnabled": false,
+          "subdeployment": "OMSJMSConnectionFactory"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [
+        {
+          "errorDestination": null,
+          "name": "jms.OMS_ADD_JMS_Q",
+          "redeliveryDelay": null,
+          "jndi": "jms/OMS_ADD_JMS_Q",
+          "subdeployment": "jms.OMS_ADD_JMS_Q"
+        }
+      ],
+      "targets": [
+        "AdminServer",
+        "osb_cluster",
+        "soa_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "OMSJMSServer"
+          ],
+          "name": "OMSJMSConnectionFactory"
+        },
+        {
+          "targets": [
+            "OMSJMSServer"
+          ],
+          "name": "jms.OMS_ADD_JMS_Q"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "SMIJMSModule",
+      "uniformDistributedQueues": [
+        {
+          "forwardingPolicy": null,
+          "errorDestination": null,
+          "loadBalancingPolicy": "Round-Robin",
+          "name": "LoggingQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/LoggingQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "forwardingPolicy": null,
+          "errorDestination": null,
+          "loadBalancingPolicy": "Round-Robin",
+          "name": "SLAAlertQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/SLAAlertQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        }
+      ],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "SMIJMSConnectionFactory",
+          "jndi": "jms/SMIJMSConnectionFactory",
+          "defaultTargetingEnabled": false,
+          "subdeployment": "SMIJMSSubdeployment"
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "SMIJMSServer1"
+          ],
+          "name": "SMIJMSSubdeployment"
+        }
+      ],
+      "quotas": []
+    }
+  ],
+  "validationWarnings": [],
+  "safRemoteContexts": {},
+  "safImportedDestinations": [],
+  "infrastructure": {
+    "migratableTargets": [],
+    "jdbcDataSources": [
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "CRM_XXCUST_XA",
+        "url": "jdbc:oracle:thin:@clsuc018-scan.uk.ssegroup.net:1602/CRMICSDV",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "CRM_XXCUST"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "OnePhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/CRM_XXCUST_XA"
+        ]
+      },
+      {
+        "maxCapacity": 50,
+        "minCapacity": 1,
+        "name": "PROMISIntegration_XA_DS",
+        "url": "jdbc:oracle:thin:@havud217:1526/DPMSTEST",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "CRM_USER"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "EmulateTwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/PROMISIntegration_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "SIMSIntegration_XA",
+        "url": "jdbc:oracle:thin:@havud301:1526/SIMSDEV",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "CRM_INTERFACE"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "OnePhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMSIntegration_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "SIMSIntegration_XA_DS",
+        "url": "jdbc:oracle:thin:@PORUC045:1526/CRMICSDV",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "CRM_INTEGRATIONS"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMSIntegration_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "SIMSOMSIntegrtion_XA_DS",
+        "url": "jdbc:oracle:thin:@//havud301:1526/simsdev",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "sims2"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "OnePhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMSOMSIntegration_XA"
+        ]
+      },
+      {
+        "maxCapacity": 50,
+        "minCapacity": 1,
+        "name": "SSE_XXCUST_XA",
+        "url": "jdbc:oracle:thin:@clsuc018-scan.uk.ssegroup.net:1602/CRMICSDV",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "CRM_XXCUST"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SSE_XXCUST_XA"
+        ]
+      }
+    ],
+    "persistentStores": [
+      {
+        "prefixName": null,
+        "directory": "FileStore_JMS",
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "name": "FileStore-JMS",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      },
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "osb_server1"
+        ],
+        "name": "OMSFileStore",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      }
+    ],
+    "jmsServers": [
+      {
+        "targets": [
+          "osb_server1"
+        ],
+        "persistentStore": "OMSFileStore",
+        "bytesMaximum": -1,
+        "name": "OMSJMSServer",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      },
+      {
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "persistentStore": "FileStore-JMS",
+        "bytesMaximum": -1,
+        "name": "SMIJMSServer1",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      }
+    ]
+  }
+}
