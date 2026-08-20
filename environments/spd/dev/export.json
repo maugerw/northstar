@@ -1,0 +1,715 @@
+{
+  "safAgents": [
+    {
+      "retryDelayBase": 20000,
+      "name": "GIS_SAF_SOA_Agent",
+      "serviceType": "Sending-only",
+      "retryDelayMaximum": 180000,
+      "retryDelayMultiplier": 1,
+      "acknowledgeInterval": -1,
+      "loggingEnabled": true,
+      "targets": [
+        "soa_server1"
+      ],
+      "windowSize": 10,
+      "store": "GIS_SOA_FileStore",
+      "timeToLive": 0
+    }
+  ],
+  "adapterDeployments": [
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "DbAdapter",
+      "planPath": "/spddevfu/products/middleware/soa/soa/Plan_Smart_DB_Adaptor.xml",
+      "sourcePath": "/spddevfu/products/middleware/soa/soa/connectors/DbAdapter.rar",
+      "connectionInstances": [
+        "eis/DB/FaultDBTest",
+        "eis/DB/FaultDatabase",
+        "eis/DB/FaultDatabaseXA",
+        "eis/DB/MPRS_DMT_NORTH_CGI_XA",
+        "eis/DB/MPRS_DMT_SOUTH_CGI_XA",
+        "eis/DB/MPRS_NORTH_CGI_XA",
+        "eis/DB/MPRS_SOA_NORTH_XA",
+        "eis/DB/MPRS_SOA_SOUTH_XA",
+        "eis/DB/MPRS_SOUTH_CGI_XA",
+        "eis/DB/SIMSOMSIntegration",
+        "eis/DB/SIMSOMSIntegration_XA",
+        "eis/DB/SIMS_XA",
+        "eis/DB/SSE_XXCUST_XA",
+        "eis/DB/Test"
+      ]
+    },
+    {
+      "targets": [
+        "soa_cluster",
+        "osb_cluster",
+        "AdminServer"
+      ],
+      "name": "JmsAdapter",
+      "planPath": "/spddevfu/products/middleware/soa/soa/connectors/Plan_Smart_JMS_Adaptor.xml",
+      "sourcePath": "/spddevfu/products/middleware/soa/soa/connectors/JmsAdapter.rar",
+      "connectionInstances": [
+        "eis/activemq/Queue",
+        "eis/aqjms/EDNLocalTxDurableTopic",
+        "eis/aqjms/EDNLocalTxTopic",
+        "eis/aqjms/EDNxaDurableTopic",
+        "eis/aqjms/EDNxaTopic",
+        "eis/aqjms/Queue",
+        "eis/aqjms/Topic",
+        "eis/fioranomq/Topic",
+        "eis/jbossmq/Queue",
+        "eis/jms/SMICF",
+        "eis/jms/aiaB2BQueueCF",
+        "eis/jms/aiaErrorTopicCF",
+        "eis/pramati/Queue",
+        "eis/sunmq/Queue",
+        "eis/tibjms/Queue",
+        "eis/tibjms/Topic",
+        "eis/tibjmsDirect/Queue",
+        "eis/tibjmsDirect/Topic",
+        "eis/webspheremq/Queue",
+        "eis/wls/EDNLocalTxDurableTopic",
+        "eis/wls/EDNLocalTxTopic",
+        "eis/wls/EDNxaDurableTopic",
+        "eis/wls/EDNxaTopic",
+        "eis/wls/Queue",
+        "eis/wls/Topic"
+      ]
+    }
+  ],
+  "jmsModules": [
+    {
+      "topics": [],
+      "name": "GIS_SAF_SOA_JMS_Module",
+      "uniformDistributedQueues": [],
+      "safErrorHandlings": [],
+      "connectionFactories": [],
+      "distributedTopics": [],
+      "queues": [],
+      "targets": [
+        "soa_server1"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "GIS_SAF_SOA_Agent"
+          ],
+          "name": "GIS_SAF_SOA_Subdeployment"
+        }
+      ],
+      "quotas": []
+    },
+    {
+      "topics": [],
+      "name": "SMIJMSModule",
+      "uniformDistributedQueues": [
+        {
+          "forwardingPolicy": null,
+          "errorDestination": null,
+          "loadBalancingPolicy": "Round-Robin",
+          "name": "OMSOutageCallbackQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/OMSOutageCallbackQueue",
+          "subdeployment": "SMIJMSSubdeployment1"
+        }
+      ],
+      "safErrorHandlings": [],
+      "connectionFactories": [
+        {
+          "name": "SMIJMSConnectionFactory",
+          "jndi": "jms/SMIJMSConnectionFactory",
+          "defaultTargetingEnabled": true,
+          "subdeployment": null
+        }
+      ],
+      "distributedTopics": [],
+      "queues": [
+        {
+          "errorDestination": null,
+          "name": "CGI_DCCAlertQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/CGI_DCCAlertQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "LoggingQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/LoggingQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "MPRSSmartMeterQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/MPRSSmartMeterQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "OMSAlertQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/OMSAlertQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "OMSOutageIncidentQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/OMSOutageIncidentQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "SIMSAlertQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/SIMSAlertQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "SLAAlertQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/SLAAlertQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "SSEPD_ConsumeSmartMeterResFromCGI",
+          "redeliveryDelay": null,
+          "jndi": "jms/SSEPD_ConsumeSmartMeterResFromCGI",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "SSEPD_UpdateSmartMeterInCGI",
+          "redeliveryDelay": null,
+          "jndi": "jms/SSEPD_UpdateSmartMeterInCGI",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "SSGSmartMeterQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/SSGSmartMeterQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "SubmitServiceRequestQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/SubmitServiceRequestQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        },
+        {
+          "errorDestination": null,
+          "name": "SubmitServiceRequestResponseQueue",
+          "redeliveryDelay": null,
+          "jndi": "jms/SubmitServiceRequestResponseQueue",
+          "subdeployment": "SMIJMSSubdeployment"
+        }
+      ],
+      "targets": [
+        "osb_cluster"
+      ],
+      "foreignServers": [],
+      "uniformDistributedTopics": [],
+      "distributedQueues": [],
+      "destinationKeys": [],
+      "templates": [],
+      "subdeployments": [
+        {
+          "targets": [
+            "SMIJMSServer1"
+          ],
+          "name": "SMIJMSSubdeployment"
+        },
+        {
+          "targets": [
+            "SMIJMSServer1"
+          ],
+          "name": "SMIJMSSubdeployment1"
+        }
+      ],
+      "quotas": []
+    }
+  ],
+  "validationWarnings": [],
+  "safRemoteContexts": {},
+  "safImportedDestinations": [],
+  "infrastructure": {
+    "migratableTargets": [],
+    "jdbcDataSources": [
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "FaultDBTest",
+        "url": "jdbc:weblogic:sqlserver://lstnrOMSDEV:1433;allowPortWithNamedInstance=true",
+        "driverName": "weblogic.jdbcx.sqlserver.SQLServerDataSource",
+        "testTableName": "SQL SELECT 1",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "databaseName",
+            "value": "Faults_UAT"
+          },
+          {
+            "name": "portNumber",
+            "value": "1433"
+          },
+          {
+            "name": "serverName",
+            "value": "lstnrOMSDEV"
+          },
+          {
+            "name": "user",
+            "value": "genfaultdbuser"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/FaultDBTest"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "FaultDatabase",
+        "url": "jdbc:weblogic:sqlserver://lstnromsdev.uk.ssegroup.net:1433;allowPortWithNamedInstance=true",
+        "driverName": "weblogic.jdbc.sqlserver.SQLServerDriver",
+        "testTableName": "SQL SELECT 1",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "databaseName",
+            "value": "Faults_DEV"
+          },
+          {
+            "name": "portNumber",
+            "value": "1433"
+          },
+          {
+            "name": "serverName",
+            "value": "lstnromsdev.uk.ssegroup.net"
+          },
+          {
+            "name": "user",
+            "value": "genfaultdbuser"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "OnePhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/FaultDatabase"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "FaultDatabaseXA",
+        "url": "jdbc:weblogic:sqlserver://lstnromsdev.uk.ssegroup.net:1433;allowPortWithNamedInstance=true",
+        "driverName": "weblogic.jdbcx.sqlserver.SQLServerDataSource",
+        "testTableName": "SQL SELECT 1",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "databaseName",
+            "value": "Faults_DEV"
+          },
+          {
+            "name": "portNumber",
+            "value": "1433"
+          },
+          {
+            "name": "serverName",
+            "value": "lstnromsdev.uk.ssegroup.net"
+          },
+          {
+            "name": "user",
+            "value": "genfaultdbuser"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/FaultDatabaseXA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "MPRS_DMT_NORTH_CGI_XA",
+        "url": "jdbc:oracle:thin:@//clsuc010-scan.uk.ssegroup.net:1602/mprsdmtn",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "MPRS_SOA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/MPRS_DMT_NORTH_CGI_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "MPRS_DMT_SOUTH_CGI_XA",
+        "url": "jdbc:oracle:thin:@//clsuc010-scan.uk.ssegroup.net:1602/mprsdmts",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "MPRS_SOA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/MPRS_DMT_SOUTH_CGI_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "MPRS_NORTH_CGI_XA",
+        "url": "jdbc:oracle:thin:@//clsuc010-scan.uk.ssegroup.net:1602/mprsdmtn",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "MPRS_SOA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/MPRS_NORTH_CGI_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "MPRS_SOA_NORTH_XA",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=clsuc010-scan.uk.ssegroup.net)(PORT=1602)))(CONNECT_DATA=(SERVICE_NAME=mprsdevn)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "MPRS_SOA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "osb_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/MPRS_SOA_NORTH_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "MPRS_SOA_SOUTH_XA",
+        "url": "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=clsuc010-scan.uk.ssegroup.net)(PORT=1602)))(CONNECT_DATA=(SERVICE_NAME=mprsdevs)))",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "MPRS_SOA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "osb_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/MPRS_SOA_SOUTH_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "MPRS_SOUTH_CGI_XA",
+        "url": "jdbc:oracle:thin:@//clsuc010-scan.uk.ssegroup.net:1602/mprsdmts",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "MPRS_SOA"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/MPRS_SOUTH_CGI_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "SIMSIntegration_NonXA",
+        "url": "jdbc:oracle:thin:@//havud301:1526/SIMSTST",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "sims2"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "osb_cluster"
+        ],
+        "globalTransactionsProtocol": "OnePhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMSIntegration_NonXA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "SIMSOMSIntegration",
+        "url": "jdbc:oracle:thin:@havud301:1526:SIMSTST",
+        "driverName": "oracle.jdbc.OracleDriver",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "sims2"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "OnePhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMSOMSIntegration"
+        ]
+      },
+      {
+        "maxCapacity": 20,
+        "minCapacity": 1,
+        "name": "SIMSOMSIntegration_XA",
+        "url": "jdbc:oracle:thin:@havud301:1526:SIMSTST",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "sims2"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMSOMSIntegration_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "SIMS_XA",
+        "url": "jdbc:oracle:thin:@havud301:1526:simsdev",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "smart_interface"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "osb_server1",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SIMS_XA"
+        ]
+      },
+      {
+        "maxCapacity": 3,
+        "minCapacity": 1,
+        "name": "SSE_XXCUST_XA",
+        "url": "jdbc:oracle:thin:@havut049:1526:DBMRDV01",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "autocommit",
+            "value": "true"
+          },
+          {
+            "name": "user",
+            "value": "SSE_XXCUST"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster",
+          "soa_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/SSE_XXCUST_XA"
+        ]
+      },
+      {
+        "maxCapacity": 15,
+        "minCapacity": 1,
+        "name": "TestXA",
+        "url": "jdbc:oracle:thin:@havut049:1526:DBMRDV01",
+        "driverName": "oracle.jdbc.xa.client.OracleXADataSource",
+        "testTableName": "SQL ISVALID",
+        "useXADataSourceInterface": null,
+        "driverProperties": [
+          {
+            "name": "user",
+            "value": "SSE_XXCUST"
+          }
+        ],
+        "testConnectionsOnReserve": false,
+        "targets": [
+          "AdminServer",
+          "osb_cluster"
+        ],
+        "globalTransactionsProtocol": "TwoPhaseCommit",
+        "initialCapacity": 1,
+        "passwordExported": false,
+        "jndiNames": [
+          "jdbc/TestXA"
+        ]
+      }
+    ],
+    "persistentStores": [
+      {
+        "prefixName": null,
+        "directory": null,
+        "targets": [
+          "soa_server1"
+        ],
+        "name": "GIS_SOA_FileStore",
+        "type": "FileStore",
+        "synchronousWritePolicy": "Direct-Write",
+        "dataSource": null
+      }
+    ],
+    "jmsServers": [
+      {
+        "targets": [
+          "osb_server1 (migratable)"
+        ],
+        "persistentStore": "FileStore_auto_1",
+        "bytesMaximum": -1,
+        "name": "SMIJMSServer1",
+        "pagingDirectory": null,
+        "messagesMaximum": -1
+      }
+    ]
+  }
+}
