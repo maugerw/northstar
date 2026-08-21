@@ -102,6 +102,33 @@ that accepts `export.json` + a suffix string and writes `export-shadow.json`
 with all created-object names (and their intra-JSON references) renamed.
 Verify by diffing the two files before running the loader against it.
 
+### 5. Remote Console rewrite of release-plan docs — BLOCKED on Richard checking the actual console (target 2026-08-week-of-25)
+Target domains are moving to WebLogic 14.2, which drops the classic Admin
+Console (removed as of 14.1.2, Dec 2024) in favour of **WebLogic Remote
+Console 3.0.5** — a separate Electron/REST-API client, not a reskin. Different
+deployment model (standalone app, not co-located with AdminServer), different
+change-workflow ("shopping cart" vs Lock & Edit/Activate), and Oracle's own
+docs say it does *not* aim for exact feature parity — "equivalent features may
+be implemented in new ways or not at all."
+
+The generated `release-plan.md`/`release-plan-detailed.md` docs
+(`gen_release_plan.py`) are written as literal classic-Admin-Console
+click-throughs ("Domain Structure → Services → Data Sources", "Change Center →
+Lock & Edit", "Page 6 (Targets): tick the targets → Finish"). None of those
+menu paths carry over. **The WLST loader (`load/`) is unaffected** — it talks
+to the domain via WLST/JMX, not the console UI, so this is a docs-only
+concern, not a loader concern.
+
+**Action (once Richard has hands on the actual Remote Console build next
+week):** confirm the exact version/build landing in the 14.2 environments,
+then update or add Remote Console equivalents to the generated release-plan
+sections — likely as an augmentation (keep classic-console steps as a
+fallback reference, add Remote Console steps alongside) rather than a
+replacement, since the manual click-through may end up secondary to the WLST
+loader path anyway. Go through `gen_release_plan.py`'s console-instruction
+generation section by section to build the concrete list of what needs
+rewriting.
+
 ## Recommended order
 
 1 (except sweep) → 2 (dry run) gives the fastest real-world confidence, since a
